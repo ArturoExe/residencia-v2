@@ -1,9 +1,4 @@
+"use client";
 export default function Home() {
-  return (
-    <main>
-      <div>
-        <h1>Hello</h1>
-      </div>
-    </main>
-  );
+  return <div> Here goes the GOOGLE SHEET VIEW</div>;
 }
