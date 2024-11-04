@@ -1,4 +1,11 @@
 "use client";
+
+import HealthDataViewer from "@/components/HealthDataViewer";
+
 export default function Home() {
-  return <div> Here goes the GOOGLE SHEET VIEW</div>;
+  return (
+    <div>
+      <HealthDataViewer />
+    </div>
+  );
 }
