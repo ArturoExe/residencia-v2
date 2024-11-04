@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import DetailsTab from "@/components/DetailsTab";
 import AntecedentesTab from "@/components/AntecedentesTab";
 import ArchivosTab from "@/components/ArchivosTab";
-import ServerTab from "@/components/ServerTab";
 import SettingsTab from "@/components/SettingsTab";
 import Loading from "../../../../components/Loading";
+import MedicoTab from "@/components/MedicoTab";
 
 const ViewPatientPage = ({ params }) => {
   const { id } = params;
@@ -99,26 +99,14 @@ const ViewPatientPage = ({ params }) => {
         </li>
         <li>
           <a
-            onClick={() => handleTabClick("server")}
+            onClick={() => handleTabClick("medico")}
             className={`flex justify-center py-4 cursor-pointer ${
-              activeTab === "server"
+              activeTab === "medico"
                 ? "bg-white rounded-lg shadow text-indigo-900"
                 : ""
             }`}
           >
-            Server Browser
-          </a>
-        </li>
-        <li>
-          <a
-            onClick={() => handleTabClick("settings")}
-            className={`flex justify-center py-4 cursor-pointer ${
-              activeTab === "settings"
-                ? "bg-white rounded-lg shadow text-indigo-900"
-                : ""
-            }`}
-          >
-            Settings
+            Estudio Medico
           </a>
         </li>
       </ul>
@@ -127,8 +115,7 @@ const ViewPatientPage = ({ params }) => {
         {activeTab === "details" && <DetailsTab patient={patient} />}
         {activeTab === "antecedentes" && <AntecedentesTab patient={id} />}
         {activeTab === "archivos" && <ArchivosTab userId={id} />}
-        {activeTab === "server" && <ServerTab />}
-        {activeTab === "settings" && <SettingsTab />}
+        {activeTab === "medico" && <MedicoTab />}
       </div>
     </div>
   );
