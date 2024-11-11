@@ -27,8 +27,8 @@ const ButtonGroup = ({ patientId }) => {
 
         if (response.ok) {
           alert("Patient deleted successfully");
-
           router.replace("/patients");
+          window.location.reload();
         } else {
           alert("Error deleting patient");
         }

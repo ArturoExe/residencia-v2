@@ -206,7 +206,7 @@ export default function EditPatientPage({ params }) {
           <Save size={18} className="mr-2" /> Save Profile
         </button>
         <button
-          onClick={() => router.push(`/patients/${id}/view`)}
+          onClick={() => router.push(`/patients/`)}
           className="bg-secondary text-secondary-foreground px-4 py-2 rounded-md hover:bg-secondary/90 transition-colors"
         >
           Go back

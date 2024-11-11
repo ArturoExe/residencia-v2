@@ -23,7 +23,6 @@ interface FormData {
   minutosActividad: number;
   diabetes: boolean;
   tipoDiabetes: string;
-  valorDiabetes: number;
   discapacidadAuditiva: boolean;
   porcentajeDiscapacidad: number;
   contactoSocial: number;
@@ -50,7 +49,6 @@ const initialFormData: FormData = {
   minutosActividad: 0,
   diabetes: false,
   tipoDiabetes: "",
-  valorDiabetes: 0,
   discapacidadAuditiva: false,
   porcentajeDiscapacidad: 0,
   contactoSocial: 0,
@@ -278,13 +276,6 @@ export default function MedicalForm() {
                         { value: "tipo2", label: "Tipo 2" },
                         { value: "gestacional", label: "Gestacional" },
                       ]}
-                    />
-                    <FormInput
-                      label="Valor diabetes"
-                      name="valorDiabetes"
-                      type="number"
-                      value={formData.valorDiabetes}
-                      onChange={handleChange}
                     />
                   </>
                 )}

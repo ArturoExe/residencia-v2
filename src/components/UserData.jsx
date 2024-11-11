@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "../styles/DatePickerStyles.css"; // Custom styles for date picker
+import { Router, useRouter } from "next/navigation";
 
 const UserForm = () => {
+  const router = useRouter();
+
   const [step, setStep] = useState(1); // Step tracker
   const [userData, setUserData] = useState({
     name: "",
@@ -71,6 +74,7 @@ const UserForm = () => {
       });
       if (response.ok) {
         alert("Form submitted successfully!");
+        router.push("/patients/");
       } else {
         console.error("Error submitting form");
         alert("Error submitting form");
@@ -104,6 +108,7 @@ const UserForm = () => {
                 Name
               </label>
               <input
+                type="text"
                 name="name"
                 value={userData.name}
                 onChange={handleChange}
@@ -118,6 +123,7 @@ const UserForm = () => {
                 Apellido Paterno
               </label>
               <input
+                type="text"
                 name="apellidoPaterno"
                 value={userData.apellidoPaterno}
                 onChange={handleChange}
@@ -132,6 +138,7 @@ const UserForm = () => {
                 Apellido Materno
               </label>
               <input
+                type="text"
                 name="apellidoMaterno"
                 value={userData.apellidoMaterno}
                 onChange={handleChange}
@@ -142,14 +149,14 @@ const UserForm = () => {
             </div>
             {/* Fecha de Nacimiento */}
             <div className="space-y-2">
-              <label className="text-sm font-semibold text-gray-600">
+              <label className="text-sm font-semibold text-gray-600 block">
                 Fecha de Nacimiento
               </label>
               <DatePicker
                 selected={userData.fechaDeNacimiento}
                 onChange={handleDateChange}
                 dateFormat="yyyy/MM/dd"
-                className="block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-4 py-2"
+                className="w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-4 py-2"
                 required
               />
             </div>
@@ -159,6 +166,7 @@ const UserForm = () => {
                 Lugar de Nacimiento
               </label>
               <input
+                type="text"
                 name="lugarDeNacimiento"
                 value={userData.lugarDeNacimiento}
                 onChange={handleChange}
@@ -172,6 +180,7 @@ const UserForm = () => {
                 Phone
               </label>
               <input
+                type="tel"
                 name="phone"
                 value={userData.phone}
                 onChange={handleChange}
@@ -185,6 +194,7 @@ const UserForm = () => {
                 Email
               </label>
               <input
+                type="email"
                 name="email"
                 value={userData.email}
                 onChange={handleChange}
@@ -199,6 +209,7 @@ const UserForm = () => {
                 Género
               </label>
               <select
+                type="text"
                 name="genero"
                 value={userData.genero}
                 onChange={handleChange}
@@ -218,6 +229,7 @@ const UserForm = () => {
                 Estatura
               </label>
               <input
+                type="number"
                 name="estatura"
                 value={userData.estatura}
                 onChange={handleChange}
@@ -231,6 +243,7 @@ const UserForm = () => {
                 Peso
               </label>
               <input
+                type="number"
                 name="peso"
                 value={userData.peso}
                 onChange={handleChange}
@@ -244,6 +257,7 @@ const UserForm = () => {
                 CURP
               </label>
               <input
+                type="text"
                 name="curp"
                 value={userData.curp}
                 onChange={handleChange}
@@ -257,6 +271,7 @@ const UserForm = () => {
                 Estado Civil
               </label>
               <input
+                type="text"
                 name="estadoCivil"
                 value={userData.estadoCivil}
                 onChange={handleChange}
@@ -270,6 +285,7 @@ const UserForm = () => {
                 Educación
               </label>
               <input
+                type="text"
                 name="educacion"
                 value={userData.educacion}
                 onChange={handleChange}
@@ -283,6 +299,7 @@ const UserForm = () => {
                 Ocupación
               </label>
               <input
+                type="text"
                 name="ocupacion"
                 value={userData.ocupacion}
                 onChange={handleChange}
@@ -315,6 +332,7 @@ const UserForm = () => {
                 Ciudad
               </label>
               <input
+                type="text"
                 name="ciudad"
                 value={userData.ciudad}
                 onChange={handleChange}
@@ -328,6 +346,7 @@ const UserForm = () => {
                 Estado
               </label>
               <input
+                type="text"
                 name="estado"
                 value={userData.estado}
                 onChange={handleChange}
@@ -341,6 +360,7 @@ const UserForm = () => {
                 Calle
               </label>
               <input
+                type="text"
                 name="calle"
                 value={userData.calle}
                 onChange={handleChange}
@@ -354,6 +374,7 @@ const UserForm = () => {
                 Colonia
               </label>
               <input
+                type="text"
                 name="colonia"
                 value={userData.colonia}
                 onChange={handleChange}
@@ -367,6 +388,7 @@ const UserForm = () => {
                 Código Postal
               </label>
               <input
+                type="text"
                 name="codigoPostal"
                 value={userData.codigoPostal}
                 onChange={handleChange}
@@ -405,6 +427,7 @@ const UserForm = () => {
                 Nombre Familiar
               </label>
               <input
+                type="text"
                 name="nombreFamiliar"
                 value={userData.nombreFamiliar}
                 onChange={handleChange}
@@ -417,6 +440,7 @@ const UserForm = () => {
                 Phone Familiar
               </label>
               <input
+                type="tel"
                 name="phoneFamiliar"
                 value={userData.phoneFamiliar}
                 onChange={handleChange}
@@ -429,6 +453,7 @@ const UserForm = () => {
                 Email Familiar
               </label>
               <input
+                type="email"
                 name="emailFamiliar"
                 value={userData.emailFamiliar}
                 onChange={handleChange}
@@ -469,182 +494,250 @@ const UserForm = () => {
               <label className="text-sm font-semibold text-gray-600">
                 Tabaco
               </label>
-              <input
+              <select
                 name="tabaco"
                 value={userData.tabaco}
                 onChange={handleChange}
                 placeholder="Consumo de Tabaco"
                 className="block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-4 py-2"
-              />
+                required
+              >
+                <option value="">Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
             </div>
             {/* Alcohol */}
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-600">
                 Alcohol
               </label>
-              <input
+              <select
                 name="alcohol"
                 value={userData.alcohol}
                 onChange={handleChange}
-                placeholder="Consumo de Alcohol"
                 className="block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-4 py-2"
-              />
+                required
+              >
+                <option value="">Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
             </div>
             {/* Drogas */}
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-600">
                 Drogas
               </label>
-              <input
+              <select
                 name="drogas"
                 value={userData.drogas}
                 onChange={handleChange}
-                placeholder="Consumo de Drogas"
                 className="block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-4 py-2"
-              />
+                required
+              >
+                <option value="">Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
             </div>
             {/* Actividad */}
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-600">
                 Actividad Física
               </label>
-              <input
+              <select
                 name="actividad"
                 value={userData.actividad}
                 onChange={handleChange}
                 placeholder="Actividad Física"
                 className="block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-4 py-2"
-              />
+                required
+              >
+                <option value="">Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
             </div>
             {/* Enfermedad Crónica */}
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-600">
                 Enfermedad Crónica
               </label>
-              <input
+              <select
                 name="enfermedadCronica"
                 value={userData.enfermedadCronica}
                 onChange={handleChange}
                 placeholder="Enfermedad Crónica"
                 className="block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-4 py-2"
-              />
+                required
+              >
+                <option value="">Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
             </div>
             {/* Alergias */}
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-600">
                 Alergias
               </label>
-              <input
+              <select
                 name="alergias"
                 value={userData.alergias}
                 onChange={handleChange}
                 placeholder="Alergias"
                 className="block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-4 py-2"
-              />
+                required
+              >
+                <option value="">Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
             </div>
             {/* Cirugías */}
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-600">
                 Cirugías
               </label>
-              <input
+              <select
                 name="cirugias"
                 value={userData.cirugias}
                 onChange={handleChange}
                 placeholder="Cirugías"
                 className="block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-4 py-2"
-              />
+                required
+              >
+                <option value="">Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
             </div>
             {/* Trastornos */}
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-600">
                 Trastornos
               </label>
-              <input
+              <select
                 name="trastornos"
                 value={userData.trastornos}
                 onChange={handleChange}
                 placeholder="Trastornos"
                 className="block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-4 py-2"
-              />
+                required
+              >
+                <option value="">Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
             </div>
             {/* Cáncer */}
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-600">
                 Cáncer
               </label>
-              <input
+              <select
                 name="cancer"
                 value={userData.cancer}
                 onChange={handleChange}
                 placeholder="Cáncer"
                 className="block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-4 py-2"
-              />
+                required
+              >
+                <option value="">Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
             </div>
             {/* Hipertensión */}
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-600">
                 Hipertensión
               </label>
-              <input
+              <select
                 name="hipertension"
                 value={userData.hipertension}
                 onChange={handleChange}
                 placeholder="Hipertensión"
                 className="block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-4 py-2"
-              />
+                required
+              >
+                <option value="">Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
             </div>
             {/* Diabetes */}
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-600">
                 Diabetes
               </label>
-              <input
+              <select
                 name="diabetes"
                 value={userData.diabetes}
                 onChange={handleChange}
                 placeholder="Diabetes"
                 className="block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-4 py-2"
-              />
+                required
+              >
+                <option value="">Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
             </div>
             {/* Cáncer Familiar */}
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-600">
                 Cáncer Familiar
               </label>
-              <input
+              <select
                 name="cancerF"
                 value={userData.cancerF}
                 onChange={handleChange}
                 placeholder="Cáncer Familiar"
                 className="block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-4 py-2"
-              />
+                required
+              >
+                <option value="">Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
             </div>
             {/* Asma */}
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-600">
                 Asma
               </label>
-              <input
+              <select
                 name="asma"
                 value={userData.asma}
                 onChange={handleChange}
                 placeholder="Asma"
                 className="block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-4 py-2"
-              />
+                required
+              >
+                <option value="">Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
             </div>
             {/* Enfermedad Neurológica */}
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-600">
                 Enfermedad Neurológica
               </label>
-              <input
+              <select
                 name="enfermedadN"
                 value={userData.enfermedadN}
                 onChange={handleChange}
                 placeholder="Enfermedad Neurológica"
                 className="block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-lg px-4 py-2"
-              />
+                required
+              >
+                <option value="">Seleccione</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
             </div>
           </div>
 
