@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
-import ClientSideWrapper from "@/components/ClientSideWrapper"; // Wrapper for client-side components
+import ClientSideWrapper from "@/components/ClientSideWrapper"; // NavBar component
+import { AuthProvider } from "@/context/AuthContext"; // AuthProvider for authentication
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -17,13 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} flex`}>
-        {/* Client-side wrapper handling stateful components */}
-        <ClientSideWrapper>
-          <div className="flex-1 ml-2 p-2">
-            {/* Render children passed to the layout */}
-            {children}
-          </div>
-        </ClientSideWrapper>
+        <AuthProvider>
+          <ClientSideWrapper>
+            {/* Render children inside the main layout */}
+            <div className="flex-1 ml-2 p-2">{children}</div>
+          </ClientSideWrapper>
+        </AuthProvider>
       </body>
     </html>
   );

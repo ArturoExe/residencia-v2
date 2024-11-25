@@ -1,10 +1,10 @@
 // src/app/patients/[id]/view/components/ServerTab.tsx
 import MedicalForm from "../components/Form/MedicalForm";
 
-const MedicoTab = () => {
+const MedicoTab = ({ userId }) => {
   return (
     <div>
-      <MedicalForm />
+      <MedicalForm userId={userId} />
     </div>
   );
 };

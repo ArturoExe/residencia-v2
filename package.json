@@ -11,12 +11,17 @@
   "dependencies": {
     "@teachablemachine/image": "^0.8.5",
     "aws-sdk": "^2.1691.0",
+    "bcryptjs": "^2.4.3",
     "date-fns": "^4.1.0",
     "encoding": "^0.1.13",
+    "framer-motion": "^11.11.17",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
     "lucide-react": "^0.452.0",
     "mongodb": "^6.9.0",
     "mongoose": "^8.7.1",
     "next": "14.2.5",
+    "nodemailer": "^6.9.16",
     "react": "^18",
     "react-datepicker": "^7.4.0",
     "react-dom": "^18",
@@ -24,7 +29,10 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^20",
+    "@types/nodemailer": "^6.4.17",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.20",

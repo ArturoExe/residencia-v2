@@ -113,9 +113,9 @@ const ViewPatientPage = ({ params }) => {
 
       <div className="mt-6">
         {activeTab === "details" && <DetailsTab patient={patient} />}
-        {activeTab === "antecedentes" && <AntecedentesTab patient={id} />}
+        {activeTab === "antecedentes" && <AntecedentesTab patient={patient} />}
         {activeTab === "archivos" && <ArchivosTab userId={id} />}
-        {activeTab === "medico" && <MedicoTab />}
+        {activeTab === "medico" && <MedicoTab userId={id} />}
       </div>
     </div>
   );

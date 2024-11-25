@@ -1,66 +1,34 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 
-// Mock data with the specified fields
-const initialData = [
-  {
-    nombre: "Juan Pérez",
-    edad: 35,
-    peso: 75,
-    altura: 175,
-    imc: 24.5,
-    hipertensionArterial: false,
-    presionSistolica: 120,
-    presionDiastolica: 80,
-    consumoAlcohol: true,
-    unidadesSemana: 5,
-    fumador: false,
-    cigarrillosSemana: 0,
-    edadInicioFumar: 0,
-    actividadFisica: true,
-    minutosActividad: 150,
-    diabetes: false,
-    tipoDiabetes: "",
-    discapacidadAuditiva: false,
-    porcentajeDiscapacidad: 0,
-    contactoSocial: 20,
-    clasificacionContactoSocial: "Medio",
-    calidadAire: "Buena",
-    ica: 50,
-  },
-  {
-    nombre: "María García",
-    edad: 28,
-    peso: 62,
-    altura: 165,
-    imc: 22.8,
-    hipertensionArterial: false,
-    presionSistolica: 110,
-    presionDiastolica: 70,
-    consumoAlcohol: false,
-    unidadesSemana: 0,
-    fumador: true,
-    cigarrillosSemana: 30,
-    edadInicioFumar: 20,
-    actividadFisica: true,
-    minutosActividad: 200,
-    diabetes: false,
-    tipoDiabetes: "",
-    discapacidadAuditiva: false,
-    porcentajeDiscapacidad: 0,
-    contactoSocial: 30,
-    clasificacionContactoSocial: "Alto",
-    calidadAire: "Moderada",
-    ica: 75,
-  },
-];
-
 export default function HealthDataViewer() {
-  const [data, setData] = useState(initialData);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const headers = Object.keys(data[0]);
+  // Fetch data from the API
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/health-data");
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        const jsonData = await response.json();
+        setData(jsonData);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const headers = data.length > 0 ? Object.keys(data[0]) : [];
 
   const deleteEntry = (index) => {
     setData(data.filter((_, i) => i !== index));
@@ -72,6 +40,14 @@ export default function HealthDataViewer() {
     XLSX.utils.book_append_sheet(workbook, worksheet, "Health Data");
     XLSX.writeFile(workbook, "health_data.xlsx");
   };
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
   return (
     <div className="container mx-auto p-6">

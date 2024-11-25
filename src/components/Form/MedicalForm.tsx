@@ -8,9 +8,11 @@ import FormCheckbox from "./FormCheckbox";
 interface FormData {
   nombre: string;
   edad: number;
+  clasificacionEdad: string;
   peso: number;
   altura: number;
   imc: number;
+  clasificacionIMC: string;
   hipertensionArterial: boolean;
   presionSistolica: number;
   presionDiastolica: number;
@@ -19,24 +21,28 @@ interface FormData {
   fumador: boolean;
   cigarrillosSemana: number;
   edadInicioFumar: number;
-  actividadFisica: boolean;
   minutosActividad: number;
-  diabetes: boolean;
-  tipoDiabetes: string;
+  actividadClasificacion: string;
+  anosEstudio: number;
+  clasificacionEstudio: string;
+  diabetesValue: number;
+  diabetesClasificacion: string;
+  calidadAireValue: number;
+  calidadAireClasificacion: string;
   discapacidadAuditiva: boolean;
   porcentajeDiscapacidad: number;
-  contactoSocial: number;
-  clasificacionContactoSocial: string;
-  calidadAire: string;
-  ica: number;
+  traumatismo: boolean;
+  porcentajeTraumatismo: number;
 }
 
 const initialFormData: FormData = {
   nombre: "",
   edad: 0,
+  clasificacionEdad: "Infancia",
   peso: 0,
   altura: 0,
   imc: 0,
+  clasificacionIMC: "Normal",
   hipertensionArterial: false,
   presionSistolica: 0,
   presionDiastolica: 0,
@@ -45,28 +51,48 @@ const initialFormData: FormData = {
   fumador: false,
   cigarrillosSemana: 0,
   edadInicioFumar: 0,
-  actividadFisica: false,
   minutosActividad: 0,
-  diabetes: false,
-  tipoDiabetes: "",
+  actividadClasificacion: "Sin actividad",
+  anosEstudio: 0,
+  clasificacionEstudio: "primaria",
+  diabetesValue: 0,
+  diabetesClasificacion: "Ninguno",
+  calidadAireValue: 0,
+  calidadAireClasificacion: "Bajo",
   discapacidadAuditiva: false,
   porcentajeDiscapacidad: 0,
-  contactoSocial: 0,
-  clasificacionContactoSocial: "",
-  calidadAire: "",
-  ica: 0,
+  traumatismo: false,
+  porcentajeTraumatismo: 0,
 };
 
-export default function MedicalForm() {
+export default function MedicalForm({ userId }: { userId: string }) {
   const [formData, setFormData] = useState<FormData>(initialFormData);
 
   useEffect(() => {
-    if (formData.peso > 0 && formData.altura > 0) {
-      const alturaMetros = formData.altura / 100;
-      const imc = formData.peso / (alturaMetros * alturaMetros);
-      setFormData((prev) => ({ ...prev, imc: Math.round(imc * 10) / 10 }));
-    }
-  }, [formData.peso, formData.altura]);
+    // Calculate IMC and classifications dynamically
+    const alturaMetros = formData.altura / 100;
+    const imc = formData.peso / (alturaMetros * alturaMetros);
+    let clasificacionIMC = "Normal";
+    if (imc < 18.5) clasificacionIMC = "Bajo peso";
+    else if (imc >= 25 && imc < 30) clasificacionIMC = "Sobrepeso";
+    else if (imc >= 30) clasificacionIMC = "Obesidad";
+
+    let clasificacionEdad = "Infancia";
+    if (formData.edad >= 0 && formData.edad <= 5)
+      clasificacionEdad = "Primera infancia";
+    else if (formData.edad <= 11) clasificacionEdad = "Infancia";
+    else if (formData.edad <= 18) clasificacionEdad = "Adolescencia";
+    else if (formData.edad <= 26) clasificacionEdad = "Juventud";
+    else if (formData.edad <= 59) clasificacionEdad = "Adultez";
+    else clasificacionEdad = "Vejez";
+
+    setFormData((prev) => ({
+      ...prev,
+      imc: Math.round(imc * 10) / 10,
+      clasificacionIMC,
+      clasificacionEdad,
+    }));
+  }, [formData.peso, formData.altura, formData.edad]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -86,10 +112,23 @@ export default function MedicalForm() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Add your form submission logic here
+
+    const response = await fetch(`/api/patients/${userId}/medical-study`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (response.ok) {
+      alert("Data submitted successfully!");
+      setFormData(initialFormData);
+    } else {
+      alert("Submission failed.");
+    }
   };
 
   return (
@@ -107,258 +146,141 @@ export default function MedicalForm() {
 
         <form onSubmit={handleSubmit} className="space-y-8">
           <FormSection title="Información Personal">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <FormInput
-                label="Nombre"
-                name="nombre"
-                value={formData.nombre}
-                onChange={handleChange}
-              />
-              <FormInput
-                label="Edad"
-                name="edad"
-                type="number"
-                value={formData.edad}
-                onChange={handleChange}
-                suffix="años"
-              />
-            </div>
+            <FormInput
+              label="Nombre"
+              name="nombre"
+              value={formData.nombre}
+              onChange={handleChange}
+            />
+            <FormInput
+              label="Edad"
+              name="edad"
+              type="number"
+              value={formData.edad}
+              onChange={handleChange}
+            />
+            <p>Clasificación por Edad: {formData.clasificacionEdad}</p>
           </FormSection>
 
           <FormSection title="Medidas Corporales">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <FormInput
-                label="Peso"
-                name="peso"
-                type="number"
-                value={formData.peso}
-                onChange={handleChange}
-                suffix="kg"
-              />
-              <FormInput
-                label="Altura"
-                name="altura"
-                type="number"
-                value={formData.altura}
-                onChange={handleChange}
-                suffix="cm"
-              />
-              <FormInput
-                label="IMC"
-                name="imc"
-                type="number"
-                value={formData.imc}
-                onChange={handleChange}
-                readOnly
-                suffix="kg/m²"
-              />
-            </div>
+            <FormInput
+              label="Peso"
+              name="peso"
+              type="number"
+              value={formData.peso}
+              onChange={handleChange}
+            />
+            <FormInput
+              label="Altura"
+              name="altura"
+              type="number"
+              value={formData.altura}
+              onChange={handleChange}
+            />
+            <FormInput
+              label="IMC"
+              name="imc"
+              type="number"
+              value={formData.imc}
+              readOnly
+            />
+            <p>Clasificación IMC: {formData.clasificacionIMC}</p>
           </FormSection>
 
           <FormSection title="Presión Arterial">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <FormCheckbox
-                label="Hipertensión Arterial"
-                name="hipertensionArterial"
-                checked={formData.hipertensionArterial}
-                onChange={handleChange}
-              />
-              <FormInput
-                label="P. Sistólica"
-                name="presionSistolica"
-                type="number"
-                value={formData.presionSistolica}
-                onChange={handleChange}
-                suffix="mmHg"
-              />
-              <FormInput
-                label="P. Diastólica"
-                name="presionDiastolica"
-                type="number"
-                value={formData.presionDiastolica}
-                onChange={handleChange}
-                suffix="mmHg"
-              />
-            </div>
+            <FormCheckbox
+              label="Hipertensión Arterial"
+              name="hipertensionArterial"
+              checked={formData.hipertensionArterial}
+              onChange={handleChange}
+            />
+            <FormInput
+              label="Presión Sistólica"
+              name="presionSistolica"
+              type="number"
+              value={formData.presionSistolica}
+              onChange={handleChange}
+            />
+            <FormInput
+              label="Presión Diastólica"
+              name="presionDiastolica"
+              type="number"
+              value={formData.presionDiastolica}
+              onChange={handleChange}
+            />
           </FormSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <FormSection title="Hábitos - Alcohol">
-              <div className="space-y-6">
-                <FormCheckbox
-                  label="Consumo de Alcohol"
-                  name="consumoAlcohol"
-                  checked={formData.consumoAlcohol}
-                  onChange={handleChange}
-                />
-                {formData.consumoAlcohol && (
-                  <FormInput
-                    label="Unidades por semana"
-                    name="unidadesSemana"
-                    type="number"
-                    value={formData.unidadesSemana}
-                    onChange={handleChange}
-                  />
-                )}
-              </div>
-            </FormSection>
-
-            <FormSection title="Hábitos - Tabaco">
-              <div className="space-y-6">
-                <FormCheckbox
-                  label="Fumador"
-                  name="fumador"
-                  checked={formData.fumador}
-                  onChange={handleChange}
-                />
-                {formData.fumador && (
-                  <div className="space-y-4">
-                    <FormInput
-                      label="Cigarrillos por semana"
-                      name="cigarrillosSemana"
-                      type="number"
-                      value={formData.cigarrillosSemana}
-                      onChange={handleChange}
-                    />
-                    <FormInput
-                      label="Edad de inicio"
-                      name="edadInicioFumar"
-                      type="number"
-                      value={formData.edadInicioFumar}
-                      onChange={handleChange}
-                      suffix="años"
-                    />
-                  </div>
-                )}
-              </div>
-            </FormSection>
-          </div>
-
-          <FormSection title="Actividad Física">
-            <div className="space-y-6">
-              <FormCheckbox
-                label="Realiza actividad física"
-                name="actividadFisica"
-                checked={formData.actividadFisica}
-                onChange={handleChange}
-              />
-              {formData.actividadFisica && (
-                <FormInput
-                  label="Minutos por semana"
-                  name="minutosActividad"
-                  type="number"
-                  value={formData.minutosActividad}
-                  onChange={handleChange}
-                  suffix="min"
-                />
-              )}
-            </div>
-          </FormSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <FormSection title="Diabetes">
-              <div className="space-y-6">
-                <FormCheckbox
-                  label="Diabetes"
-                  name="diabetes"
-                  checked={formData.diabetes}
-                  onChange={handleChange}
-                />
-                {formData.diabetes && (
-                  <>
-                    <FormSelect
-                      label="Tipo de diabetes"
-                      name="tipoDiabetes"
-                      value={formData.tipoDiabetes}
-                      onChange={handleChange}
-                      options={[
-                        { value: "tipo1", label: "Tipo 1" },
-                        { value: "tipo2", label: "Tipo 2" },
-                        { value: "gestacional", label: "Gestacional" },
-                      ]}
-                    />
-                  </>
-                )}
-              </div>
-            </FormSection>
-
-            <FormSection title="Discapacidad Auditiva">
-              <div className="space-y-6">
-                <FormCheckbox
-                  label="Discapacidad Auditiva"
-                  name="discapacidadAuditiva"
-                  checked={formData.discapacidadAuditiva}
-                  onChange={handleChange}
-                />
-                {formData.discapacidadAuditiva && (
-                  <FormInput
-                    label="Porcentaje de discapacidad"
-                    name="porcentajeDiscapacidad"
-                    type="number"
-                    value={formData.porcentajeDiscapacidad}
-                    onChange={handleChange}
-                    suffix="%"
-                  />
-                )}
-              </div>
-            </FormSection>
-          </div>
 
           <FormSection title="Otros Factores">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <FormCheckbox
+              label="Discapacidad Auditiva"
+              name="discapacidadAuditiva"
+              checked={formData.discapacidadAuditiva}
+              onChange={handleChange}
+            />
+            {formData.discapacidadAuditiva && (
               <FormInput
-                label="Contacto Social"
-                name="contactoSocial"
+                label="Porcentaje de Discapacidad Auditiva"
+                name="porcentajeDiscapacidad"
                 type="number"
-                value={formData.contactoSocial}
+                value={formData.porcentajeDiscapacidad}
                 onChange={handleChange}
-                suffix="%"
               />
-              <FormSelect
-                label="Clasificación Contacto Social"
-                name="clasificacionContactoSocial"
-                value={formData.clasificacionContactoSocial}
-                onChange={handleChange}
-                options={[
-                  { value: "bajo", label: "Bajo" },
-                  { value: "medio", label: "Medio" },
-                  { value: "alto", label: "Alto" },
-                ]}
-              />
-              <FormSelect
-                label="Calidad del aire"
-                name="calidadAire"
-                value={formData.calidadAire}
-                onChange={handleChange}
-                options={[
-                  { value: "buena", label: "Buena" },
-                  { value: "moderada", label: "Moderada" },
-                  { value: "mala", label: "Mala" },
-                  { value: "muy-mala", label: "Muy mala" },
-                ]}
-              />
+            )}
+
+            <FormCheckbox
+              label="Traumatismo Craneoencefálico"
+              name="traumatismo"
+              checked={formData.traumatismo}
+              onChange={handleChange}
+            />
+            {formData.traumatismo && (
               <FormInput
-                label="ICA (Valor medio)"
-                name="ica"
+                label="Porcentaje de Traumatismo"
+                name="porcentajeTraumatismo"
                 type="number"
-                value={formData.ica}
+                value={formData.porcentajeTraumatismo}
                 onChange={handleChange}
               />
-            </div>
+            )}
+          </FormSection>
+
+          <FormSection title="Diabetes">
+            <FormSelect
+              label="Tipo de Diabetes"
+              name="diabetesValue"
+              value={formData.diabetesValue.toString()}
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  diabetesValue: Number(e.target.value),
+                  diabetesClasificacion:
+                    e.target.options[e.target.selectedIndex].text,
+                }))
+              }
+              options={[
+                { value: "0", label: "Ninguno" },
+                { value: "1", label: "Tipo 1" },
+                { value: "2", label: "Tipo 2" },
+                { value: "3", label: "Tipo 2 controlado" },
+              ]}
+            />
+          </FormSection>
+
+          <FormSection title="Calidad del Aire">
+            <FormInput
+              label="Valor Medio ICA"
+              name="calidadAireValue"
+              type="number"
+              value={formData.calidadAireValue}
+              onChange={handleChange}
+            />
+            <p>Clasificación del Aire: {formData.calidadAireClasificacion}</p>
           </FormSection>
 
           <div className="flex justify-end">
             <button
               type="submit"
-              className="
-                px-8 py-3 rounded-xl
-                bg-gradient-to-r from-blue-600 to-blue-700
-                text-white font-semibold
-                shadow-lg shadow-blue-500/30
-                hover:shadow-xl hover:shadow-blue-500/40
-                transform hover:-translate-y-0.5
-                transition-all duration-200
-              "
+              className="px-8 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
             >
               Guardar Información
             </button>

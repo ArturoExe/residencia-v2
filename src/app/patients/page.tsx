@@ -1,10 +1,12 @@
 "use client";
 import PatientTable from "@/components/PatientTable";
-
+import ProtectedRoute from "@/components/ProtectedRoute";
 export default function Patients() {
   return (
-    <main>
-      <PatientTable />
-    </main>
+    <ProtectedRoute>
+      <main>
+        <PatientTable />
+      </main>
+    </ProtectedRoute>
   );
 }
