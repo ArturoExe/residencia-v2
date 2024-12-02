@@ -2,12 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
+import { useToast } from "@/hooks/useToast";
 
 export default function HealthDataViewer() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const { toast } = useToast();
   // Fetch data from the API
   useEffect(() => {
     const fetchData = async () => {
@@ -39,6 +40,11 @@ export default function HealthDataViewer() {
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Health Data");
     XLSX.writeFile(workbook, "health_data.xlsx");
+    toast({
+      title: "Download Completed",
+      description: "Excel file downloaded",
+      type: "success",
+    });
   };
 
   if (loading) {

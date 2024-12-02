@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 import ClientSideWrapper from "@/components/ClientSideWrapper"; // NavBar component
 import { AuthProvider } from "@/context/AuthContext"; // AuthProvider for authentication
-
+import { Toaster } from "sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,8 +21,10 @@ export default function RootLayout({
       <body className={`${inter.className} flex`}>
         <AuthProvider>
           <ClientSideWrapper>
+            <Toaster position="bottom-center" />
+
             {/* Render children inside the main layout */}
-            <div className="flex-1 ml-2 p-2">{children}</div>
+            <div className="flex-1">{children}</div>
           </ClientSideWrapper>
         </AuthProvider>
       </body>

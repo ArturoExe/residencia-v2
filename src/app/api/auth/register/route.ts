@@ -18,6 +18,7 @@ export async function POST(request) {
     const existingUser = await MedicalStaff.findOne({
       $or: [{ email }, { id }],
     });
+
     if (existingUser) {
       return NextResponse.json(
         { message: "Email or ID already exists." },
