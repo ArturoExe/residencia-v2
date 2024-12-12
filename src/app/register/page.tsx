@@ -18,6 +18,15 @@ export default function RegisterPage() {
   const router = useRouter();
   const { login } = useAuth();
   const { toast } = useToast();
+<<<<<<< HEAD
+=======
+
+  const content = {
+    en: {
+      createAccount: "Create Account",
+    },
+  };
+>>>>>>> 554991e (Traducciones)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -129,7 +138,11 @@ export default function RegisterPage() {
             transition={{ delay: 0.2 }}
           >
             <h2 className="text-center text-3xl font-bold text-gray-900 dark:text-white">
+<<<<<<< HEAD
               Crear cuenta
+=======
+              Crear Cuenta
+>>>>>>> 554991e (Traducciones)
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
               Únete a la plataforma

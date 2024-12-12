@@ -89,7 +89,7 @@ const ViewPatientPage = ({ params }) => {
         animate={{ opacity: 1, y: 0 }}
         className="text-3xl font-bold text-gray-900 py-4 border-b mb-10"
       >
-        Detalles del paciente
+        Detalles del Paciente
       </motion.h1>
 
       <motion.ul
