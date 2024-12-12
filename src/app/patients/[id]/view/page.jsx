@@ -27,7 +27,7 @@ const ViewPatientPage = ({ params }) => {
       try {
         const response = await fetch(`/api/patients/${id}`);
         if (!response.ok) {
-          throw new Error("Error al conseguir información del paciente");
+          throw new Error("Error al conseguir datos del paciente");
         }
         const data = await response.json();
         console.log(id);
@@ -73,7 +73,7 @@ const ViewPatientPage = ({ params }) => {
         animate={{ opacity: 1, y: 0 }}
         className="text-gray-500 text-center p-4"
       >
-        No se ha encontrado el paciente
+        Paciente no encontrado
       </motion.div>
     );
   }
@@ -89,7 +89,7 @@ const ViewPatientPage = ({ params }) => {
         animate={{ opacity: 1, y: 0 }}
         className="text-3xl font-bold text-gray-900 py-4 border-b mb-10"
       >
-        Detalles del Paciente{" "}
+        Detalles del paciente
       </motion.h1>
 
       <motion.ul

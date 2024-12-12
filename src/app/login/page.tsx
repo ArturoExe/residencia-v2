@@ -79,7 +79,7 @@ export default function LoginPage() {
                   autoComplete="email"
                   required
                   className="pl-10 w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
-                  placeholder="Email address"
+                  placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -94,7 +94,7 @@ export default function LoginPage() {
                   autoComplete="current-password"
                   required
                   className="pl-10 w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
-                  placeholder="Password"
+                  placeholder="Contraseña"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
@@ -125,7 +125,7 @@ export default function LoginPage() {
               {isSubmitting ? (
                 <Loader2 className="animate-spin -ml-1 mr-2 h-4 w-4" />
               ) : null}
-              {isSubmitting ? "Signing in..." : "Sign in"}
+              {isSubmitting ? "Iniciando sesión..." : "Inicia sesión"}
             </motion.button>
           </form>
 

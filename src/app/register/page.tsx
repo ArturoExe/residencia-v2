@@ -76,16 +76,16 @@ export default function RegisterPage() {
       type: "select",
       value: role,
       onChange: setRole,
-      placeholder: "Seleccionar Rol",
+      placeholder: "Selecciona el rol",
       icon: <User className="text-gray-400" size={20} />,
-      options: ["Doctor", "Nurse", "Technician", "Admin", "Other"],
+      options: ["Doctor", "Enfermero", "Técnico", "Administrador", "Otro"],
     },
     {
       id: "name",
       type: "text",
       value: name,
       onChange: setName,
-      placeholder: "Nombre Completo",
+      placeholder: "Nombre completo",
       icon: <User className="text-gray-400" size={20} />,
     },
     {
@@ -101,7 +101,7 @@ export default function RegisterPage() {
       type: "password",
       value: password,
       onChange: setPassword,
-      placeholder: "Password",
+      placeholder: "Contraseña",
       icon: <Lock className="text-gray-400" size={20} />,
     },
     {
@@ -132,7 +132,7 @@ export default function RegisterPage() {
               Crear cuenta
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-              Únete a nuestra plataforma
+              Únete a la plataforma
             </p>
           </motion.div>
 
@@ -189,7 +189,7 @@ export default function RegisterPage() {
               {isSubmitting && (
                 <Loader2 className="animate-spin -ml-1 mr-2 h-4 w-4" />
               )}
-              {isSubmitting ? "Creando cuenta..." : "Crear cuenta"}
+              {isSubmitting ? "Creando cuenta..." : "Crear Cuenta"}
             </motion.button>
           </form>
 
@@ -199,7 +199,7 @@ export default function RegisterPage() {
             </div>
             <div className="relative flex justify-center text-sm">
               <span className="px-2 bg-white dark:bg-gray-900 text-gray-500">
-                or
+                o
               </span>
             </div>
           </div>
@@ -209,7 +209,7 @@ export default function RegisterPage() {
               href="/login"
               className="text-sm font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 transition duration-200"
             >
-              ¿Ya tienes una cuenta? Ingresa ahora
+              ¿Ya tienes una cuenta? Inicia sesión
             </Link>
           </motion.div>
         </div>
