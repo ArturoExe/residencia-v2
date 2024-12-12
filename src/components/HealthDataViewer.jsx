@@ -48,7 +48,7 @@ export default function HealthDataViewer() {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p>Cargando...</p>;
   }
 
   if (error) {
@@ -57,12 +57,12 @@ export default function HealthDataViewer() {
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Health Data Viewer</h1>
+      <h1 className="text-2xl font-bold mb-4">Vista de datos de salud</h1>
       <button
         onClick={downloadExcel}
         className="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
       >
-        Download Excel
+        Descargar Excel
       </button>
       <div className="overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left text-gray-500">
@@ -73,7 +73,7 @@ export default function HealthDataViewer() {
                   {header}
                 </th>
               ))}
-              <th className="px-6 py-3">Actions</th>
+              <th className="px-6 py-3">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -93,7 +93,7 @@ export default function HealthDataViewer() {
                     onClick={() => deleteEntry(index)}
                     className="font-medium text-red-600 hover:underline"
                   >
-                    Delete
+                    Eliminar
                   </button>
                 </td>
               </tr>

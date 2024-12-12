@@ -19,7 +19,7 @@ export async function PUT(req, { params }) {
     if (missingFields.length > 0) {
       return new Response(
         JSON.stringify({
-          message: `Missing required fields: ${missingFields.join(", ")}`,
+          message: `Faltan los siguientes campos: ${missingFields.join(", ")}`,
         }),
         { status: 400 }
       );
@@ -28,14 +28,14 @@ export async function PUT(req, { params }) {
     // Additional validation (optional, adjust as needed)
     if (data.edad < 0) {
       return new Response(
-        JSON.stringify({ message: "Age must be a positive number" }),
+        JSON.stringify({ message: "Edad tiene que ser un número positivo" }),
         { status: 400 }
       );
     }
     if (data.peso <= 0 || data.altura <= 0) {
       return new Response(
         JSON.stringify({
-          message: "Weight and height must be positive numbers",
+          message: "Peso y altura deben ser números positivos",
         }),
         { status: 400 }
       );
@@ -51,7 +51,7 @@ export async function PUT(req, { params }) {
     // Return the updated patient record
     return new Response(
       JSON.stringify({
-        message: "Patient updated successfully",
+        message: "Se actualizó correctamente el usuario",
         updatedPatient,
       }),
       {
@@ -60,10 +60,10 @@ export async function PUT(req, { params }) {
     );
   } catch (error) {
     // Handle errors and return a 500 status
-    console.error("Error updating patient:", error);
+    console.error("Error al actualizar paciente:", error);
     return new Response(
       JSON.stringify({
-        message: "Error updating patient",
+        message: "Error al actualizar paciente",
         error: error.message,
       }),
       { status: 500 }

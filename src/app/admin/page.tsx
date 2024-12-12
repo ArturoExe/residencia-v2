@@ -114,18 +114,18 @@ export default function UsersPage() {
           <div className="space-y-6">
             <div className="flex justify-between items-center">
               <h1 className="text-2xl font-semibold text-gray-900">
-                User Management
+                Administración de Usuarios
               </h1>
               <UserSearchBar value={searchTerm} onChange={setSearchTerm} />
             </div>
 
             {isLoading ? (
               <div className="text-center py-8">
-                <p>Loading users...</p>
+                <p>Cargando usuarios...</p>
               </div>
             ) : filteredUsers.length === 0 ? (
               <div className="text-center py-8">
-                <p>No users found.</p>
+                <p>No se encontraron usuarios.</p>
               </div>
             ) : (
               <UserTable

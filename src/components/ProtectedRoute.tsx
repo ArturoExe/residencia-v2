@@ -16,7 +16,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
   // Show a loading spinner or placeholder while checking authentication
   if (loading) {
-    return <p>Loading...</p>;
+    return <p>Cargando...</p>;
   }
 
   return <>{children}</>;

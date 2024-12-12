@@ -3,7 +3,7 @@ const DetailsTab = ({ patient }) => {
     <div>
       {/* User Info Section */}
       <div>
-        <h3 className="font-semibold text-lg">User Info</h3>
+        <h3 className="font-semibold text-lg">Información de usuario</h3>
         <p>
           <strong>Nombre:</strong> {patient.name}
         </p>
@@ -28,9 +28,9 @@ const DetailsTab = ({ patient }) => {
 
       {/* Contact Info Section */}
       <div>
-        <h3 className="font-semibold text-lg">Contact Info</h3>
+        <h3 className="font-semibold text-lg">Información de contacto</h3>
         <p>
-          <strong>Phone:</strong> {patient.phone}
+          <strong>Teléfono:</strong> {patient.phone}
         </p>
         <p>
           <strong>Email:</strong> {patient.email}
@@ -55,7 +55,7 @@ const DetailsTab = ({ patient }) => {
 
       {/* Additional Info Section */}
       <div>
-        <h3 className="font-semibold text-lg">Additional Info</h3>
+        <h3 className="font-semibold text-lg">Información adicional</h3>
         <p>
           <strong>Estatura:</strong> {patient.estatura}
         </p>

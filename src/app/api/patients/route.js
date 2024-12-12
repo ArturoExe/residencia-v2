@@ -38,10 +38,10 @@ export async function GET(req) {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.error("Error fetching patients:", error);
+    console.error("Error al conseguir pacientes:", error);
     return new Response(
       JSON.stringify({
-        message: "Error fetching patients",
+        message: "Error al conseguir pacientes",
         error: error.message,
       }),
       { status: 500, headers: { "Content-Type": "application/json" } }

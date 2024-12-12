@@ -23,13 +23,13 @@ const PatientTable = () => {
         `/api/patients?page=${page}&limit=${patientsPerPage}&search=${search}`
       );
       if (!response.ok) {
-        throw new Error("Failed to fetch patients");
+        throw new Error("Error al conseguir pacientes");
       }
       const data = await response.json();
       setPatients(data.patients);
       setTotalPages(data.totalPages);
     } catch (error) {
-      console.error("Error fetching patients:", error);
+      console.error("Error al conseguir pacientes:", error);
       setError(error.message);
     } finally {
       setLoading(false); // Set loading to false after fetching is complete
