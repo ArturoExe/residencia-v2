@@ -67,7 +67,6 @@ const ViewPatientPage = ({ params }) => {
   }
 
   if (!patient) {
-<<<<<<< HEAD
     return (
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -77,13 +76,9 @@ const ViewPatientPage = ({ params }) => {
         Patient not found
       </motion.div>
     );
-=======
-    return <div>Paciente no encontrado</div>;
->>>>>>> a4ddd69 (Traducciones)
   }
 
   return (
-<<<<<<< HEAD
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -96,10 +91,6 @@ const ViewPatientPage = ({ params }) => {
       >
         Patient Details
       </motion.h1>
-=======
-    <div className="container mx-auto py-6 px-4">
-      <h1 className="text-3xl py-4 border-b mb-10">Detalles del Paciente</h1>
->>>>>>> a4ddd69 (Traducciones)
 
       <motion.ul
         initial={{ opacity: 0, y: 20 }}
