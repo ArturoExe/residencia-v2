@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 import { useToast } from "@/hooks/useToast";
 import { Loader2, User, Mail, Lock, IdCard } from "lucide-react";
 import Link from "next/link";
-import { useLanguage } from "@/context/LanguageContext";
 
 export default function RegisterPage() {
   const [role, setRole] = useState<string>("");
@@ -19,12 +18,6 @@ export default function RegisterPage() {
   const router = useRouter();
   const { login } = useAuth();
   const { toast } = useToast();
-
-  const content = {
-    en: {
-      createAccount: "Create Account",
-    },
-  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -83,7 +76,7 @@ export default function RegisterPage() {
       type: "select",
       value: role,
       onChange: setRole,
-      placeholder: "Selecciona el rol",
+      placeholder: "Select Role",
       icon: <User className="text-gray-400" size={20} />,
       options: ["Doctor", "Enfermero", "Técnico", "Administrador", "Otro"],
     },
@@ -100,7 +93,7 @@ export default function RegisterPage() {
       type: "email",
       value: email,
       onChange: setEmail,
-      placeholder: "Email",
+      placeholder: "Correo",
       icon: <Mail className="text-gray-400" size={20} />,
     },
     {
@@ -136,7 +129,7 @@ export default function RegisterPage() {
             transition={{ delay: 0.2 }}
           >
             <h2 className="text-center text-3xl font-bold text-gray-900 dark:text-white">
-              Crear Cuenta
+              Crear cuenta
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
               Únete a la plataforma
