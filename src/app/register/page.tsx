@@ -76,7 +76,7 @@ export default function RegisterPage() {
       type: "select",
       value: role,
       onChange: setRole,
-      placeholder: "Select Role",
+      placeholder: "Selecciona el rol",
       icon: <User className="text-gray-400" size={20} />,
       options: ["Doctor", "Enfermero", "Técnico", "Administrador", "Otro"],
     },
