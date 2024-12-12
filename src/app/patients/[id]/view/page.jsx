@@ -73,7 +73,7 @@ const ViewPatientPage = ({ params }) => {
         animate={{ opacity: 1, y: 0 }}
         className="text-gray-500 text-center p-4"
       >
-        Patient not found
+        No se ha encontrado el paciente
       </motion.div>
     );
   }
@@ -89,7 +89,7 @@ const ViewPatientPage = ({ params }) => {
         animate={{ opacity: 1, y: 0 }}
         className="text-3xl font-bold text-gray-900 py-4 border-b mb-10"
       >
-        Patient Details
+        Detalles del Paciente{" "}
       </motion.h1>
 
       <motion.ul
