@@ -123,7 +123,7 @@ export default function Sidebar() {
             transition={{ duration: 0.2 }}
             className="whitespace-nowrap overflow-hidden"
           >
-            Logout
+            Cerrar sesión
           </motion.span>
         </button>
       </div>

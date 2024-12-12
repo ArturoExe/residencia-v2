@@ -10,7 +10,7 @@ export async function POST(request) {
 
     if (!role || !name || !email || !password || !id) {
       return NextResponse.json(
-        { message: "All fields are required." },
+        { message: "Todos los campos son requeridos." },
         { status: 400 }
       );
     }
@@ -21,7 +21,7 @@ export async function POST(request) {
 
     if (existingUser) {
       return NextResponse.json(
-        { message: "Email or ID already exists." },
+        { message: "Email o ID ya existente." },
         { status: 400 }
       );
     }
@@ -36,17 +36,17 @@ export async function POST(request) {
 
     await newUser.save();
 
-    return NextResponse.json({ message: "User registered successfully." });
+    return NextResponse.json({ message: "Usuario registrado exitosamente." });
   } catch (error) {
-    console.error("Registration Error:", error);
+    console.error("Error de Registro:", error);
     if (error.code === 11000) {
       return NextResponse.json(
-        { message: "Duplicate entry detected." },
+        { message: "Se detectó una entrada duplicada." },
         { status: 400 }
       );
     }
     return NextResponse.json(
-      { message: "An unexpected error occurred." },
+      { message: "Ha sucedido un error inesperado." },
       { status: 500 }
     );
   }

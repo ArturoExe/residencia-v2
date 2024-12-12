@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { useToast } from "@/hooks/useToast";
 import { Loader2, User, Mail, Lock, IdCard } from "lucide-react";
 import Link from "next/link";
-import { useLanguage } from "@/context/LanguageContext";
+import { LanguageProvider, useLanguage } from "@/context/LanguageContext";
 
 export default function RegisterPage() {
   const [role, setRole] = useState<string>("");
@@ -33,8 +33,8 @@ export default function RegisterPage() {
     // Validate input fields
     if (!role || !name || !email || !password || !id) {
       toast({
-        title: "Missing Fields",
-        description: "All fields should be filled",
+        title: "Campos faltantes",
+        description: "Todos los campos deben ser llenados",
         type: "warning",
       });
     }
@@ -52,8 +52,8 @@ export default function RegisterPage() {
         const data = await response.json();
         login(data.token);
         toast({
-          title: "Registration Successful",
-          description: "Welcome to Health Portal!",
+          title: "Registro exitoso",
+          description: "¡Bienvenido!",
           type: "success",
         });
         router.push("/healthviewer");
@@ -61,8 +61,8 @@ export default function RegisterPage() {
         const errorData = await response.json();
         console.log(errorData);
         toast({
-          title: "Registration Failed",
-          description: errorData.message || "Please try again.",
+          title: "Registro fallido",
+          description: errorData.message || "Intente de nuevo.",
           type: "error",
         });
       }
@@ -123,105 +123,107 @@ export default function RegisterPage() {
   ];
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 px-4 sm:px-6 lg:px-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-md w-full"
-      >
-        <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 space-y-8">
-          <motion.div
-            initial={{ scale: 0.95 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2 }}
-          >
-            <h2 className="text-center text-3xl font-bold text-gray-900 dark:text-white">
-              Create Account
-            </h2>
-            <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-              Join our healthcare platform
-            </p>
-          </motion.div>
+    <LanguageProvider>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="max-w-md w-full"
+        >
+          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 space-y-8">
+            <motion.div
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.2 }}
+            >
+              <h2 className="text-center text-3xl font-bold text-gray-900 dark:text-white">
+                Crear cuenta
+              </h2>
+              <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
+                Únete a nuestra plataforma
+              </p>
+            </motion.div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {formFields.map((field, index) => (
-              <motion.div
-                key={field.id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="relative"
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {formFields.map((field, index) => (
+                <motion.div
+                  key={field.id}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="relative"
+                >
+                  <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
+                    {field.icon}
+                  </div>
+                  {field.type === "select" ? (
+                    <select
+                      id={field.id}
+                      value={field.value}
+                      onChange={(e) => field.onChange(e.target.value)}
+                      className="pl-10 w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                    >
+                      <option value="">{field.placeholder}</option>
+                      {field.options?.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  ) : (
+                    <input
+                      id={field.id}
+                      type={field.type}
+                      value={field.value}
+                      onChange={(e) => field.onChange(e.target.value)}
+                      placeholder={field.placeholder}
+                      className="pl-10 w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+                    />
+                  )}
+                </motion.div>
+              ))}
+
+              <motion.button
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.99 }}
+                type="submit"
+                disabled={isSubmitting}
+                className={`relative w-full flex items-center justify-center px-4 py-3 text-white rounded-xl text-sm font-medium transition duration-200 ${
+                  isSubmitting
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-blue-600 hover:bg-blue-700"
+                }`}
               >
-                <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
-                  {field.icon}
-                </div>
-                {field.type === "select" ? (
-                  <select
-                    id={field.id}
-                    value={field.value}
-                    onChange={(e) => field.onChange(e.target.value)}
-                    className="pl-10 w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
-                  >
-                    <option value="">{field.placeholder}</option>
-                    {field.options?.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                ) : (
-                  <input
-                    id={field.id}
-                    type={field.type}
-                    value={field.value}
-                    onChange={(e) => field.onChange(e.target.value)}
-                    placeholder={field.placeholder}
-                    className="pl-10 w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
-                  />
+                {isSubmitting && (
+                  <Loader2 className="animate-spin -ml-1 mr-2 h-4 w-4" />
                 )}
-              </motion.div>
-            ))}
+                {isSubmitting ? "Creando cuenta..." : "Crear cuenta"}
+              </motion.button>
+            </form>
 
-            <motion.button
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.99 }}
-              type="submit"
-              disabled={isSubmitting}
-              className={`relative w-full flex items-center justify-center px-4 py-3 text-white rounded-xl text-sm font-medium transition duration-200 ${
-                isSubmitting
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-blue-600 hover:bg-blue-700"
-              }`}
-            >
-              {isSubmitting && (
-                <Loader2 className="animate-spin -ml-1 mr-2 h-4 w-4" />
-              )}
-              {isSubmitting ? "Creating Account..." : "Create Account"}
-            </motion.button>
-          </form>
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-200 dark:border-gray-700"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white dark:bg-gray-900 text-gray-500">
+                  or
+                </span>
+              </div>
+            </div>
 
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-200 dark:border-gray-700"></div>
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white dark:bg-gray-900 text-gray-500">
-                or
-              </span>
-            </div>
+            <motion.div whileHover={{ scale: 1.01 }} className="text-center">
+              <Link
+                href="/login"
+                className="text-sm font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 transition duration-200"
+              >
+                ¿Ya tienes una cuenta? Ingresa ahora
+              </Link>
+            </motion.div>
           </div>
-
-          <motion.div whileHover={{ scale: 1.01 }} className="text-center">
-            <Link
-              href="/login"
-              className="text-sm font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 transition duration-200"
-            >
-              Already have an account? Sign in
-            </Link>
-          </motion.div>
-        </div>
-      </motion.div>
-    </div>
+        </motion.div>
+      </div>
+    </LanguageProvider>
   );
 }

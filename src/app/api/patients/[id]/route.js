@@ -13,7 +13,7 @@ export async function GET(req, { params }) {
 
     // Return the patient data if found
     if (!patient) {
-      return new Response(JSON.stringify({ message: "Patient not found" }), {
+      return new Response(JSON.stringify({ message: "Paciente no encontrado" }), {
         status: 404,
       });
     }
@@ -21,7 +21,7 @@ export async function GET(req, { params }) {
     return new Response(JSON.stringify(patient), { status: 200 });
   } catch (error) {
     return new Response(
-      JSON.stringify({ message: "Error fetching patient data", error }),
+      JSON.stringify({ message: "Error al conseguir información del paciente", error }),
       {
         status: 500,
       }
@@ -38,19 +38,19 @@ export async function DELETE(req, { params }) {
     const deletedPatient = await Patient.findByIdAndDelete(id);
 
     if (!deletedPatient) {
-      return new Response(JSON.stringify({ message: "Patient not found" }), {
+      return new Response(JSON.stringify({ message: "Paciente no encontrado" }), {
         status: 404,
       });
     }
 
     return new Response(
-      JSON.stringify({ message: "Patient deleted successfully" }),
+      JSON.stringify({ message: "Paciente eliminado correctamente" }),
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error deleting patient:", error);
+    console.error("Error al eliminar paciente:", error);
     return new Response(
-      JSON.stringify({ message: "Error deleting patient", error }),
+      JSON.stringify({ message: "Error al eliminar paciente", error }),
       { status: 500 }
     );
   }
@@ -68,16 +68,16 @@ export async function PUT(req, { params }) {
     });
 
     if (!updatedPatient) {
-      return new Response(JSON.stringify({ message: "Patient not found" }), {
+      return new Response(JSON.stringify({ message: "Paciente no encontrado" }), {
         status: 404,
       });
     }
 
     return new Response(JSON.stringify(updatedPatient), { status: 200 });
   } catch (error) {
-    console.error("Error updating patient:", error);
+    console.error("Error al actualizar paciente:", error);
     return new Response(
-      JSON.stringify({ message: "Error updating patient", error }),
+      JSON.stringify({ message: "Error al actualizar paciente", error }),
       { status: 500 }
     );
   }
