@@ -21,7 +21,7 @@ const ViewPatientPage = ({ params }) => {
       try {
         const response = await fetch(`/api/patients/${id}`);
         if (!response.ok) {
-          throw new Error("Failed to fetch patient data");
+          throw new Error("Error al conseguir información del paciente");
         }
         const data = await response.json();
         console.log(id);
@@ -49,7 +49,7 @@ const ViewPatientPage = ({ params }) => {
   }
 
   if (!patient) {
-    return <div>Patient not found</div>;
+    return <div>Paciente no encontrado</div>;
   }
 
   const handleTabClick = (tabName) => {
@@ -58,7 +58,7 @@ const ViewPatientPage = ({ params }) => {
 
   return (
     <div className="container mx-auto py-6 px-4">
-      <h1 className="text-3xl py-4 border-b mb-10">Patient Details</h1>
+      <h1 className="text-3xl py-4 border-b mb-10">Detalles del Paciente</h1>
 
       <ul className="grid grid-flow-col text-center text-gray-500 bg-gray-100 rounded-lg p-1">
         <li>

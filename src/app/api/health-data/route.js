@@ -14,10 +14,10 @@ export async function GET(req) {
     return new Response(JSON.stringify(medicalData), { status: 200 });
   } catch (error) {
     // Handle errors
-    console.error("Error fetching medical data:", error);
+    console.error("Error al conseguir datos médicos:", error);
     return new Response(
       JSON.stringify({
-        message: "Error fetching medical data",
+        message: "Error al conseguir datos médicos",
         error: error.message,
       }),
       { status: 500 }

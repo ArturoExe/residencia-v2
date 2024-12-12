@@ -106,7 +106,7 @@ export default function EditPatientPage({ params }) {
       try {
         const response = await fetch(`/api/patients/${id}`);
         if (!response.ok) {
-          throw new Error("Failed to fetch patient data");
+          throw new Error("Error al conseguir información del paciente");
         }
         const data = await response.json();
         setFields(
@@ -116,7 +116,7 @@ export default function EditPatientPage({ params }) {
           }))
         );
       } catch (error) {
-        console.error("Error fetching patient data:", error);
+        console.error("Error al conseguir información del paciente:", error);
       }
     };
 
@@ -155,14 +155,14 @@ export default function EditPatientPage({ params }) {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to update patient data");
+        throw new Error("Error al actualizar información del paciente");
       }
 
-      alert("Patient information updated!");
+      alert("¡Se ha actualizado la información del paciente!");
       setFields(fields.map((field) => ({ ...field, isEditing: false })));
       router.push(`/patients/${id}/view`); // Redirect to the view page after editing
     } catch (error) {
-      console.error("Error updating patient data:", error);
+      console.error("Error al actualizar información del paciente:", error);
     }
   };
 
@@ -203,13 +203,13 @@ export default function EditPatientPage({ params }) {
           onClick={handleSave}
           className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors flex items-center"
         >
-          <Save size={18} className="mr-2" /> Save Profile
+          <Save size={18} className="mr-2" /> Guardar Perfil
         </button>
         <button
           onClick={() => router.push(`/patients/`)}
           className="bg-secondary text-secondary-foreground px-4 py-2 rounded-md hover:bg-secondary/90 transition-colors"
         >
-          Go back
+          Regresar
         </button>
       </div>
     </div>

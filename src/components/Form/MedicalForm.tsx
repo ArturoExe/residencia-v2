@@ -124,10 +124,10 @@ export default function MedicalForm({ userId }: { userId: string }) {
     });
 
     if (response.ok) {
-      alert("Data submitted successfully!");
+      alert("Datos enviados correctamente!");
       setFormData(initialFormData);
     } else {
-      alert("Submission failed.");
+      alert("Envío fallido.");
     }
   };
 

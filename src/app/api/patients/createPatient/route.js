@@ -22,7 +22,7 @@ export async function POST(req) {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.error("Error adding patient:", error);
+    console.error("Error al añadir paciente:", error);
 
     // Return an error response
     return new Response(

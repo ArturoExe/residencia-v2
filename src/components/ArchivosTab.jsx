@@ -12,7 +12,7 @@ const modelURLs = {
 
 const ArchivosTab = ({ userId }) => {
   if (!userId) {
-    console.error("User ID is required but not provided.");
+    console.error("El ID de usuario es requerido pero no ha sido ingresado.");
     return null;
   }
 
@@ -33,7 +33,7 @@ const ArchivosTab = ({ userId }) => {
       try {
         const response = await fetch(`/api/patients/${userId}/images`);
         if (!response.ok) {
-          throw new Error("Failed to fetch images");
+          throw new Error("Error al conseguir imágenes");
         }
         const images = await response.json();
 
@@ -47,7 +47,7 @@ const ArchivosTab = ({ userId }) => {
           }))
         );
       } catch (error) {
-        console.error("Error fetching images:", error);
+        console.error("Error al conseguir imágenes:", error);
       } finally {
         setLoading(false);
       }
@@ -74,7 +74,7 @@ const ArchivosTab = ({ userId }) => {
     try {
       const fileObj = currentImageForModelSelection;
 
-      console.log("Selected model:", modelId);
+      console.log("Modelo elegido:", modelId);
       setModelURL(modelURLs[modelId]);
 
       // Wait for the model to load before making predictions
@@ -84,7 +84,7 @@ const ArchivosTab = ({ userId }) => {
 
       // Make the prediction
       const predictions = await predict(fileObj.file);
-      console.log("Predictions received:", predictions);
+      console.log("Prediccion recibidas:", predictions);
 
       let probability = 0;
       let className = "N/A";
@@ -96,9 +96,9 @@ const ArchivosTab = ({ userId }) => {
         className = predictedClassName;
       }
 
-      console.log("Uploading image to S3...");
+      console.log("Subiendo imagen a S3...");
       const uploadedUrl = await uploadImage(fileObj.file);
-      console.log("Image uploaded to S3:", uploadedUrl);
+      console.log("Imagen subida a S3:", uploadedUrl);
 
       // Store image data in the database after successful prediction and upload
       const diseaseName = "exampleDisease";
@@ -121,7 +121,7 @@ const ArchivosTab = ({ userId }) => {
         },
       ]);
     } catch (error) {
-      console.error("Upload or prediction failed:", error);
+      console.error("Carga o predicción fallida:", error);
     } finally {
       setLoading(false);
       setShowModelSelection(false);
@@ -145,12 +145,12 @@ const ArchivosTab = ({ userId }) => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to save image metadata");
+        throw new Error("Error al guardar metadatos de la imagen");
       }
 
-      console.log("Image metadata stored successfully");
+      console.log("Metadatos de la imagen almacenados correctamente");
     } catch (error) {
-      console.error("Error saving image metadata:", error);
+      console.error("Error al guardar metadatos de la imagen:", error);
     }
   };
 
@@ -166,13 +166,13 @@ const ArchivosTab = ({ userId }) => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to delete image");
+        throw new Error("Error al eliminar la imagen");
       }
 
-      console.log("Image deleted successfully");
+      console.log("Imagen eliminada correctamente");
       setUploadedFiles((prev) => prev.filter((f) => f.file.name !== file.name));
     } catch (error) {
-      console.error("Error deleting image:", error);
+      console.error("Error al eliminar la imagen:", error);
     } finally {
       setLoading(false);
     }
@@ -203,7 +203,7 @@ const ArchivosTab = ({ userId }) => {
           <span className="flex items-center space-x-2">
             <Upload className="w-6 h-6 text-gray-600" />
             <span className="font-medium text-gray-600">
-              Drop files to Attach, or browse
+              Suelte archivos para adjuntar o explore
             </span>
           </span>
           <input
@@ -218,17 +218,17 @@ const ArchivosTab = ({ userId }) => {
 
       {uploadedFiles.length > 0 && (
         <div className="mt-6">
-          <h2 className="text-lg font-semibold mb-2">Uploaded Images</h2>
+          <h2 className="text-lg font-semibold mb-2">Imagenes Subidas</h2>
           <div className="overflow-x-auto">
             <table className="min-w-full bg-white">
               <thead className="bg-gray-100">
                 <tr>
-                  <th className="py-2 px-4 text-left">Preview</th>
-                  <th className="py-2 px-4 text-left">File Name</th>
-                  <th className="py-2 px-4 text-left">Upload Status</th>
-                  <th className="py-2 px-4 text-left">Probability</th>
-                  <th className="py-2 px-4 text-left">Class Name</th>
-                  <th className="py-2 px-4 text-left">Actions</th>
+                  <th className="py-2 px-4 text-left">Prevista</th>
+                  <th className="py-2 px-4 text-left">Nombre del archivo</th>
+                  <th className="py-2 px-4 text-left">Estado de carga</th>
+                  <th className="py-2 px-4 text-left">Probabilidad</th>
+                  <th className="py-2 px-4 text-left">Nombre de la clase</th>
+                  <th className="py-2 px-4 text-left">Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -327,7 +327,7 @@ const ArchivosTab = ({ userId }) => {
               onClick={closeImagePopup}
               className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
             >
-              Close
+              Cerrar
             </button>
             <span className="m-7">{selectedImage.name}</span>
           </div>

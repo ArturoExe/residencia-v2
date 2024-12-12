@@ -12,9 +12,9 @@ export async function GET() {
     const staff = await MedicalStaff.find({}).lean(); // Use `lean()` for better performance
     return NextResponse.json({ users: staff }, { status: 200 });
   } catch (error) {
-    console.error("Error fetching staff:", error);
+    console.error("Error al conseguir personal:", error);
     return NextResponse.json(
-      { message: "Error fetching staff", error: error.message },
+      { message: "Error al conseguir personal", error: error.message },
       { status: 500 }
     );
   }
@@ -28,7 +28,10 @@ export async function PATCH(req) {
 
     // Validate and convert `id` to ObjectId
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return NextResponse.json({ error: "Invalid user ID" }, { status: 400 });
+      return NextResponse.json(
+        { error: "ID de Usuario inválido" },
+        { status: 400 }
+      );
     }
 
     const userId = new mongoose.Types.ObjectId(id);
@@ -45,17 +48,20 @@ export async function PATCH(req) {
     );
 
     if (!updatedUser) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
+      return NextResponse.json(
+        { error: "Usuario no encontrado" },
+        { status: 404 }
+      );
     }
 
     return NextResponse.json(
-      { message: "User updated successfully", user: updatedUser },
+      { message: "Se actualizó el usuario correctamente", user: updatedUser },
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error updating user:", error);
+    console.error("Error al actualizar usuario:", error);
     return NextResponse.json(
-      { error: "Error updating user", details: error.message },
+      { error: "Error al actualizar usuario", details: error.message },
       { status: 500 }
     );
   }
@@ -69,7 +75,7 @@ export async function DELETE(req: Request) {
 
     if (!id) {
       return NextResponse.json(
-        { message: "User ID is required" },
+        { message: "ID de Usuario es requerido" },
         { status: 400 }
       );
     }
@@ -78,17 +84,20 @@ export async function DELETE(req: Request) {
     const deletedStaff = await MedicalStaff.findByIdAndDelete(id);
 
     if (!deletedStaff) {
-      return NextResponse.json({ message: "User not found" }, { status: 404 });
+      return NextResponse.json(
+        { message: "Usuario no encontrado" },
+        { status: 404 }
+      );
     }
 
     return NextResponse.json(
-      { message: "User deleted successfully", user: deletedStaff },
+      { message: "User eliminado correctamente", user: deletedStaff },
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error deleting staff:", error);
+    console.error("Error al eliminar personal:", error);
     return NextResponse.json(
-      { message: "Error deleting staff", error: error.message },
+      { message: "Error al eliminar personal", error: error.message },
       { status: 500 }
     );
   }

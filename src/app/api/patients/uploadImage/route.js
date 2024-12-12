@@ -20,9 +20,9 @@ export async function POST(request) {
 
     return NextResponse.json(newDiagnosis, { status: 201 });
   } catch (error) {
-    console.error("Error saving diagnosis:", error);
+    console.error("Error al guardar diagnóstico:", error);
     return NextResponse.json(
-      { error: "Failed to save diagnosis" },
+      { error: "Error al guardar diagnóstico" },
       { status: 500 }
     );
   }
