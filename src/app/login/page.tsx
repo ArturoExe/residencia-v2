@@ -37,10 +37,10 @@ export default function LoginPage() {
         router.push(redirectUrl); // Redirect to the intended page
       } else {
         const errorData = await response.json();
-        setError(errorData.message || "Invalid email or password.");
+        setError(errorData.message || "Email o contraseña inválida.");
       }
     } catch (err) {
-      setError("An unexpected error occurred. Please try again later.");
+      setError("Ha ocurrido un error inesperado. Por favor intente más tarde.");
     } finally {
       setIsSubmitting(false);
     }
@@ -61,10 +61,10 @@ export default function LoginPage() {
             transition={{ delay: 0.2 }}
           >
             <h2 className="text-center text-3xl font-bold text-gray-900 dark:text-white">
-              Welcome Back
+              Bienvenido
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-              Sign in to access your account
+              Ingresa a tu cuenta
             </p>
           </motion.div>
 
@@ -79,7 +79,7 @@ export default function LoginPage() {
                   autoComplete="email"
                   required
                   className="pl-10 w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
-                  placeholder="Email address"
+                  placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -94,7 +94,7 @@ export default function LoginPage() {
                   autoComplete="current-password"
                   required
                   className="pl-10 w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
-                  placeholder="Password"
+                  placeholder="Contraseña"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
@@ -125,7 +125,7 @@ export default function LoginPage() {
               {isSubmitting ? (
                 <Loader2 className="animate-spin -ml-1 mr-2 h-4 w-4" />
               ) : null}
-              {isSubmitting ? "Signing in..." : "Sign in"}
+              {isSubmitting ? "Iniciando sesión..." : "Inicia sesión"}
             </motion.button>
           </form>
 
@@ -135,7 +135,7 @@ export default function LoginPage() {
             </div>
             <div className="relative flex justify-center text-sm">
               <span className="px-2 bg-white dark:bg-gray-900 text-gray-500">
-                or
+                o
               </span>
             </div>
           </div>
@@ -145,7 +145,7 @@ export default function LoginPage() {
               href="/register"
               className="text-sm font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 transition duration-200"
             >
-              Don&apos;t have an account? Register
+              ¿No tienes una cuenta? Registrate
             </Link>
           </motion.div>
         </div>

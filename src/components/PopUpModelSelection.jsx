@@ -41,11 +41,11 @@ export default function PopUpModelSelection({
           <div>
             <img
               src={imagePreview}
-              alt="Upload preview"
+              alt="Vista previa"
               className="w-full h-64 object-cover rounded-lg mb-4"
             />
             <p className="text-gray-600 mb-4">
-              Selecciona un modelo para comenzar. La imagen es eliminada si no
+              Selecciona un modelo para comenzar. La imagen será eliminada si no
               se selecciona un modelo
             </p>
           </div>

@@ -14,7 +14,7 @@ export async function POST(request) {
 
     if (!user) {
       return NextResponse.json(
-        { message: "Invalid email or password." },
+        { message: "Email o contraseña inválida." },
         { status: 404 }
       );
     }
@@ -23,14 +23,14 @@ export async function POST(request) {
 
     if (!isPasswordValid) {
       return NextResponse.json(
-        { message: "Invalid email or password." },
+        { message: "Email o contraseña inválida." },
         { status: 401 }
       );
     }
 
     if (!user.isApproved) {
       return NextResponse.json(
-        { message: "Your account is not approved yet." },
+        { message: "Tu cuenta no ha sido aprobada" },
         { status: 403 }
       );
     }
@@ -45,11 +45,11 @@ export async function POST(request) {
       { expiresIn: "1h" }
     );
 
-    return NextResponse.json({ message: "Login successful", token });
+    return NextResponse.json({ message: "Login exitoso", token });
   } catch (error) {
     console.error("Login Error:", error);
     return NextResponse.json(
-      { message: "An unexpected error occurred." },
+      { message: "Un error inesperado ha sucedido." },
       { status: 500 }
     );
   }

@@ -23,22 +23,22 @@ export function UserTable({
         <thead>
           <tr className="text-left border-b border-gray-200">
             <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-              User
+              Usuario
             </th>
             <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Role
+              Rol
             </th>
             <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Status
+              Estado
             </th>
             <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Created
+              Creado
             </th>
             <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Last Active
+              Última vez visto
             </th>
             <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Actions
+              Acciones
             </th>
           </tr>
         </thead>
@@ -66,10 +66,10 @@ export function UserTable({
                   className="bg-transparent border border-gray-300 rounded-md px-2 py-1 text-sm"
                 >
                   <option value="Doctor">Doctor</option>
-                  <option value="Nurse">Nurse</option>
-                  <option value="Technician">Technician</option>
-                  <option value="Admin">Admin</option>
-                  <option value="Other">Other</option>
+                  <option value="Nurse">Enfermero</option>
+                  <option value="Technician">Técnico</option>
+                  <option value="Admin">Administrador</option>
+                  <option value="Other">Otro</option>
                 </select>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">

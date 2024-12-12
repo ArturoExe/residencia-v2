@@ -19,7 +19,6 @@ export default function RegisterPage() {
   const router = useRouter();
   const { login } = useAuth();
   const { toast } = useToast();
-  const { language } = useLanguage();
 
   const content = {
     en: {
@@ -33,8 +32,8 @@ export default function RegisterPage() {
     // Validate input fields
     if (!role || !name || !email || !password || !id) {
       toast({
-        title: "Missing Fields",
-        description: "All fields should be filled",
+        title: "Campos faltantes",
+        description: "Todos los campos deben ser llenados",
         type: "warning",
       });
     }
@@ -52,8 +51,8 @@ export default function RegisterPage() {
         const data = await response.json();
         login(data.token);
         toast({
-          title: "Registration Successful",
-          description: "Welcome to Health Portal!",
+          title: "Registro exitoso",
+          description: "¡Bienvenido!",
           type: "success",
         });
         router.push("/healthviewer");
@@ -61,8 +60,8 @@ export default function RegisterPage() {
         const errorData = await response.json();
         console.log(errorData);
         toast({
-          title: "Registration Failed",
-          description: errorData.message || "Please try again.",
+          title: "Registro fallido",
+          description: errorData.message || "Intente de nuevo.",
           type: "error",
         });
       }
@@ -84,16 +83,16 @@ export default function RegisterPage() {
       type: "select",
       value: role,
       onChange: setRole,
-      placeholder: "Select Role",
+      placeholder: "Selecciona el rol",
       icon: <User className="text-gray-400" size={20} />,
-      options: ["Doctor", "Nurse", "Technician", "Admin", "Other"],
+      options: ["Doctor", "Enfermero", "Técnico", "Administrador", "Otro"],
     },
     {
       id: "name",
       type: "text",
       value: name,
       onChange: setName,
-      placeholder: "Full Name",
+      placeholder: "Nombre completo",
       icon: <User className="text-gray-400" size={20} />,
     },
     {
@@ -109,7 +108,7 @@ export default function RegisterPage() {
       type: "password",
       value: password,
       onChange: setPassword,
-      placeholder: "Password",
+      placeholder: "Contraseña",
       icon: <Lock className="text-gray-400" size={20} />,
     },
     {
@@ -137,10 +136,10 @@ export default function RegisterPage() {
             transition={{ delay: 0.2 }}
           >
             <h2 className="text-center text-3xl font-bold text-gray-900 dark:text-white">
-              Create Account
+              Crear Cuenta
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-              Join our healthcare platform
+              Únete a la plataforma
             </p>
           </motion.div>
 
@@ -197,7 +196,7 @@ export default function RegisterPage() {
               {isSubmitting && (
                 <Loader2 className="animate-spin -ml-1 mr-2 h-4 w-4" />
               )}
-              {isSubmitting ? "Creating Account..." : "Create Account"}
+              {isSubmitting ? "Creando cuenta..." : "Crear Cuenta"}
             </motion.button>
           </form>
 
@@ -207,7 +206,7 @@ export default function RegisterPage() {
             </div>
             <div className="relative flex justify-center text-sm">
               <span className="px-2 bg-white dark:bg-gray-900 text-gray-500">
-                or
+                o
               </span>
             </div>
           </div>
@@ -217,7 +216,7 @@ export default function RegisterPage() {
               href="/login"
               className="text-sm font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 transition duration-200"
             >
-              Already have an account? Sign in
+              ¿Ya tienes una cuenta? Inicia sesión
             </Link>
           </motion.div>
         </div>

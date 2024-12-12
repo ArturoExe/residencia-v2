@@ -105,7 +105,7 @@ const UserForm = () => {
             {/* Name */}
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-600">
-                Name
+                Nombre
               </label>
               <input
                 type="text"
@@ -177,7 +177,7 @@ const UserForm = () => {
             {/* Phone */}
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-600">
-                Phone
+                Teléfono
               </label>
               <input
                 type="tel"
@@ -315,7 +315,7 @@ const UserForm = () => {
               onClick={nextStep}
               className="px-5 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600"
             >
-              Next
+              Siguiente
             </button>
           </div>
         </>
@@ -324,7 +324,7 @@ const UserForm = () => {
       {/* Step 2: Contact Information */}
       {step === 2 && (
         <>
-          <h2 className="text-lg font-semibold">Contact Information</h2>
+          <h2 className="text-lg font-semibold">Información de contacto</h2>
           <div className="grid grid-cols-2 gap-6">
             {/* Ciudad */}
             <div className="space-y-2">
@@ -404,14 +404,14 @@ const UserForm = () => {
               onClick={prevStep}
               className="px-5 py-2 bg-gray-300 text-gray-600 rounded-full hover:bg-gray-400"
             >
-              Previous
+              Regresar
             </button>
             <button
               type="button"
               onClick={nextStep}
               className="px-5 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600"
             >
-              Next
+              Siguiente
             </button>
           </div>
         </>
@@ -420,7 +420,7 @@ const UserForm = () => {
       {/* Step 3: Family and Social Habits */}
       {step === 3 && (
         <>
-          <h2 className="text-lg font-semibold">Family and Social Habits</h2>
+          <h2 className="text-lg font-semibold">Familia y hábitos sociales</h2>
           <div className="grid grid-cols-2 gap-6">
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-600">
@@ -437,7 +437,7 @@ const UserForm = () => {
             </div>
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-600">
-                Phone Familiar
+                Teléfono Familiar
               </label>
               <input
                 type="tel"
@@ -469,14 +469,14 @@ const UserForm = () => {
               onClick={prevStep}
               className="px-5 py-2 bg-gray-300 text-gray-600 rounded-full hover:bg-gray-400"
             >
-              Previous
+              Regresar
             </button>
             <button
               type="button"
               onClick={nextStep}
               className="px-5 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600"
             >
-              Next
+              Siguiente
             </button>
           </div>
         </>
@@ -486,7 +486,7 @@ const UserForm = () => {
       {step === 4 && (
         <>
           <h2 className="text-lg font-semibold">
-            Health and Habits Information
+            Información de Salud y Hábitos
           </h2>
           <div className="grid grid-cols-2 gap-6">
             {/* Tabaco */}
@@ -747,13 +747,13 @@ const UserForm = () => {
               onClick={prevStep}
               className="px-5 py-2 bg-gray-300 text-gray-600 rounded-full hover:bg-gray-400"
             >
-              Previous
+              Regresar
             </button>
             <button
               type="submit"
               className="px-5 py-2 bg-green-500 text-white rounded-full hover:bg-green-600"
             >
-              Submit
+              Siguiente
             </button>
           </div>
         </>

@@ -2,8 +2,8 @@
 const SettingsTab = () => {
   return (
     <div>
-      <h2>Settings</h2>
-      <p>This section will cover settings.</p>
+      <h2>Ajustes</h2>
+      <p>Esta sección permitirá realizar ajustes.</p>
     </div>
   );
 };

@@ -67,20 +67,20 @@ export async function DELETE(req, { params }) {
     });
 
     if (!deletedImage) {
-      return new Response(JSON.stringify({ message: "Image not found" }), {
+      return new Response(JSON.stringify({ message: "Imagen no encontrada" }), {
         status: 404,
       });
     }
 
     console.log("Deleted Image:", deletedImage);
     return new Response(
-      JSON.stringify({ message: "Image deleted successfully" }),
+      JSON.stringify({ message: "Imagen eliminada correctamente" }),
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error deleting image:", error);
+    console.error("Error al eliminar imagen:", error);
     return new Response(
-      JSON.stringify({ message: "Error deleting image", error }),
+      JSON.stringify({ message: "Error al eliminar imagen", error }),
       { status: 500 }
     );
   }

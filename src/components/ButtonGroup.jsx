@@ -17,7 +17,7 @@ const ButtonGroup = ({ patientId }) => {
 
   const handleDelete = async () => {
     const confirmDelete = confirm(
-      "Are you sure you want to delete this patient?"
+      "Estás seguro que quieres eliminar este paciente?"
     );
     if (confirmDelete) {
       try {
@@ -26,15 +26,15 @@ const ButtonGroup = ({ patientId }) => {
         });
 
         if (response.ok) {
-          alert("Patient deleted successfully");
+          alert("Paciente eliminado correctamente");
           router.replace("/patients");
           window.location.reload();
         } else {
-          alert("Error deleting patient");
+          alert("Error al eliminar paciente");
         }
       } catch (error) {
-        console.error("Error deleting patient:", error);
-        alert("Error deleting patient");
+        console.error("Error al eliminar paciente:", error);
+        alert("Error al eliminar paciente");
       }
     }
   };
