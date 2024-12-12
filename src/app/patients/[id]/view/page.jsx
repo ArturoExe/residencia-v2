@@ -1,20 +1,26 @@
 "use client";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { useState, useEffect } from "react";
 import DetailsTab from "@/components/DetailsTab";
 import AntecedentesTab from "@/components/AntecedentesTab";
 import ArchivosTab from "@/components/ArchivosTab";
-import SettingsTab from "@/components/SettingsTab";
 import Loading from "../../../../components/Loading";
 import MedicoTab from "@/components/MedicoTab";
-
+import TabButton from "@/components/TabButton";
+import TabContent from "@/components/TabContent";
 const ViewPatientPage = ({ params }) => {
   const { id } = params;
   const [activeTab, setActiveTab] = useState("details");
   const [patient, setPatient] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const tabs = [
+    { id: "details", label: "Detalles de paciente" },
+    { id: "antecedentes", label: "Antecedentes" },
+    { id: "archivos", label: "Archivos" },
+    { id: "medico", label: "Estudio Medico" },
+  ];
   // Fetch the patient data from the API
   useEffect(() => {
     const fetchPatient = async () => {
@@ -38,86 +44,81 @@ const ViewPatientPage = ({ params }) => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen w-11/12">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="flex items-center justify-center h-screen w-11/12"
+      >
         <Loading />
-      </div>
+      </motion.div>
     );
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-red-500 text-center p-4"
+      >
+        Error: {error}
+      </motion.div>
+    );
   }
 
   if (!patient) {
-    return <div>Patient not found</div>;
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-gray-500 text-center p-4"
+      >
+        Patient not found
+      </motion.div>
+    );
   }
 
-  const handleTabClick = (tabName) => {
-    setActiveTab(tabName);
-  };
-
   return (
-    <div className="container mx-auto py-6 px-4">
-      <h1 className="text-3xl py-4 border-b mb-10">Patient Details</h1>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="container mx-auto py-6 px-4 max-w-7xl"
+    >
+      <motion.h1
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-3xl font-bold text-gray-900 py-4 border-b mb-10"
+      >
+        Patient Details
+      </motion.h1>
 
-      <ul className="grid grid-flow-col text-center text-gray-500 bg-gray-100 rounded-lg p-1">
-        <li>
-          <a
-            onClick={() => handleTabClick("details")}
-            className={`flex justify-center py-4 cursor-pointer ${
-              activeTab === "details"
-                ? "bg-white rounded-lg shadow text-indigo-900"
-                : ""
-            }`}
+      <motion.ul
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="grid grid-flow-col text-center bg-gray-50 rounded-xl p-2 gap-2"
+      >
+        {tabs.map((tab) => (
+          <TabButton
+            key={tab.id}
+            isActive={activeTab === tab.id}
+            onClick={() => setActiveTab(tab.id)}
           >
-            Detalles de paciente
-          </a>
-        </li>
-        <li>
-          <a
-            onClick={() => handleTabClick("antecedentes")}
-            className={`flex justify-center py-4 cursor-pointer ${
-              activeTab === "antecedentes"
-                ? "bg-white rounded-lg shadow text-indigo-900"
-                : ""
-            }`}
-          >
-            Antecedentes
-          </a>
-        </li>
-        <li>
-          <a
-            onClick={() => handleTabClick("archivos")}
-            className={`flex justify-center py-4 cursor-pointer ${
-              activeTab === "archivos"
-                ? "bg-white rounded-lg shadow text-indigo-900"
-                : ""
-            }`}
-          >
-            Archivos
-          </a>
-        </li>
-        <li>
-          <a
-            onClick={() => handleTabClick("medico")}
-            className={`flex justify-center py-4 cursor-pointer ${
-              activeTab === "medico"
-                ? "bg-white rounded-lg shadow text-indigo-900"
-                : ""
-            }`}
-          >
-            Estudio Medico
-          </a>
-        </li>
-      </ul>
+            {tab.label}
+          </TabButton>
+        ))}
+      </motion.ul>
 
-      <div className="mt-6">
-        {activeTab === "details" && <DetailsTab patient={patient} />}
-        {activeTab === "antecedentes" && <AntecedentesTab patient={patient} />}
-        {activeTab === "archivos" && <ArchivosTab userId={id} />}
-        {activeTab === "medico" && <MedicoTab userId={id} />}
-      </div>
-    </div>
+      <AnimatePresence mode="wait">
+        <TabContent>
+          {activeTab === "details" && <DetailsTab patient={patient} />}
+          {activeTab === "antecedentes" && (
+            <AntecedentesTab patient={patient} />
+          )}
+          {activeTab === "archivos" && <ArchivosTab userId={id} />}
+          {activeTab === "medico" && <MedicoTab userId={id} />}
+        </TabContent>
+      </AnimatePresence>
+    </motion.div>
   );
 };
 
