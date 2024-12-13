@@ -36,7 +36,7 @@ const initialFormData = {
 };
 
 export default function MedicalForm({ userId }) {
-  const [formData, setFormData] = useState < FormData > initialFormData;
+  const [formData, setFormData] = useState(initialFormData);
 
   useEffect(() => {
     // Calculate IMC and classifications dynamically
