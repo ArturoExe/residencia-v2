@@ -83,7 +83,7 @@ export default function UsersPage() {
     }
   };
 
-  const handleChangeRole = async (userId: string, newRole: string) => {
+  const handleChangeRole = async (userId, newRole) => {
     try {
       const response = await fetch("/api/admin", {
         method: "PATCH",
