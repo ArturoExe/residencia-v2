@@ -5,37 +5,7 @@ import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
 import FormCheckbox from "./FormCheckbox";
 
-interface FormData {
-  nombre: string;
-  edad: number;
-  clasificacionEdad: string;
-  peso: number;
-  altura: number;
-  imc: number;
-  clasificacionIMC: string;
-  hipertensionArterial: boolean;
-  presionSistolica: number;
-  presionDiastolica: number;
-  consumoAlcohol: boolean;
-  unidadesSemana: number;
-  fumador: boolean;
-  cigarrillosSemana: number;
-  edadInicioFumar: number;
-  minutosActividad: number;
-  actividadClasificacion: string;
-  anosEstudio: number;
-  clasificacionEstudio: string;
-  diabetesValue: number;
-  diabetesClasificacion: string;
-  calidadAireValue: number;
-  calidadAireClasificacion: string;
-  discapacidadAuditiva: boolean;
-  porcentajeDiscapacidad: number;
-  traumatismo: boolean;
-  porcentajeTraumatismo: number;
-}
-
-const initialFormData: FormData = {
+const initialFormData = {
   nombre: "",
   edad: 0,
   clasificacionEdad: "Infancia",
@@ -65,8 +35,8 @@ const initialFormData: FormData = {
   porcentajeTraumatismo: 0,
 };
 
-export default function MedicalForm({ userId }: { userId: string }) {
-  const [formData, setFormData] = useState<FormData>(initialFormData);
+export default function MedicalForm({ userId }) {
+  const [formData, setFormData] = useState < FormData > initialFormData;
 
   useEffect(() => {
     // Calculate IMC and classifications dynamically
@@ -94,12 +64,9 @@ export default function MedicalForm({ userId }: { userId: string }) {
     }));
   }, [formData.peso, formData.altura, formData.edad]);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const handleChange = (e) => {
     const { name, value, type } = e.target;
-    const checked =
-      type === "checkbox" ? (e.target as HTMLInputElement).checked : undefined;
+    const checked = type === "checkbox" ? e.target.checked : undefined;
 
     setFormData((prev) => ({
       ...prev,
@@ -112,7 +79,7 @@ export default function MedicalForm({ userId }: { userId: string }) {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const response = await fetch(`/api/patients/${userId}/medical-study`, {
