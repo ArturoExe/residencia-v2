@@ -9,17 +9,17 @@ import { Loader2, User, Mail, Lock, IdCard } from "lucide-react";
 import Link from "next/link";
 
 export default function RegisterPage() {
-  const [role, setRole] = useState<string>("");
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [id, setId] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [role, setRole] = useState < string > "";
+  const [name, setName] = useState < string > "";
+  const [email, setEmail] = useState < string > "";
+  const [id, setId] = useState < string > "";
+  const [password, setPassword] = useState < string > "";
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const { login } = useAuth();
   const { toast } = useToast();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validate input fields
