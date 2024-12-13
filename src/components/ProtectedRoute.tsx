@@ -1,22 +1,39 @@
 "use client";
 
-import { useAuth } from "@/context/AuthContext";
-import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
-const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { isAuthenticated, loading } = useAuth();
+interface ProtectedRouteProps {
+  children: React.ReactNode;
+  requireAdmin?: boolean; // Flag to enforce admin role
+}
+
+const ProtectedRoute = ({
+  children,
+  requireAdmin = false,
+}: ProtectedRouteProps) => {
+  const { isAuthenticated, role, loading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!loading && !isAuthenticated) {
-      router.push("/login"); // Redirect to login if not authenticated
+    if (!loading) {
+      if (!isAuthenticated) {
+        console.log("hello");
+        // router.push("/login"); // Redirect to login if not authenticated
+      } else if (requireAdmin && role !== "Admin") {
+        console.log("admin");
+        // router.push("/unauthorized"); // Redirect if not an admin
+      }
     }
-  }, [isAuthenticated, loading, router]);
+  }, [isAuthenticated, role, loading, requireAdmin, router]);
 
-  // Show a loading spinner or placeholder while checking authentication
   if (loading) {
-    return <p>Cargando...</p>;
+    return <div>Loading...</div>; // Show loading state
+  }
+
+  if (!isAuthenticated || (requireAdmin && role !== "admin")) {
+    return null; // Prevent rendering content
   }
 
   return <>{children}</>;

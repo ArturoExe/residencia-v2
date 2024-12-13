@@ -33,7 +33,10 @@ export default function LoginPage() {
 
       if (response.ok) {
         const data = await response.json();
-        login(data.token); // Save the token in AuthContext
+
+        login(data.token, data.role);
+
+        // Save the token in AuthContext
         router.push(redirectUrl); // Redirect to the intended page
       } else {
         const errorData = await response.json();

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
-import ClientSideWrapper from "@/components/ClientSideWrapper"; // NavBar component
-import { AuthProvider } from "@/context/AuthContext"; // AuthProvider for authentication
+import { AuthProvider } from "@/context/AuthContext";
 import { Toaster } from "sonner";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -13,19 +13,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body className={`${inter.className} flex`}>
         <AuthProvider>
-          <ClientSideWrapper>
-            <Toaster position="bottom-center" />
-
-            {/* Render children inside the main layout */}
-            <div className="flex-1">{children}</div>
-          </ClientSideWrapper>
+          <Toaster position="bottom-center" />
+          <main className="flex-1">{children}</main>
         </AuthProvider>
       </body>
     </html>

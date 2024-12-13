@@ -45,7 +45,11 @@ export async function POST(request) {
       { expiresIn: "1h" }
     );
 
-    return NextResponse.json({ message: "Login exitoso", token });
+    return NextResponse.json({
+      message: "Login exitoso",
+      token,
+      role: user.role,
+    });
   } catch (error) {
     console.error("Login Error:", error);
     return NextResponse.json(

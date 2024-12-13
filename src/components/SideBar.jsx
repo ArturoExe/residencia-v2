@@ -13,21 +13,30 @@ import {
   LogOut,
   ChevronRight,
 } from "lucide-react";
+
 export default function Sidebar() {
-  const { logout } = useAuth();
+  const { logout, role } = useAuth(); // Get role from AuthContext
   const router = useRouter();
   const [isCollapsed, setIsCollapsed] = useState(false);
+
   const sidebarVariants = {
     expanded: { width: "240px" },
     collapsed: { width: "72px" },
   };
 
+  console.log(role);
+
+  // Dynamically filter menu items based on role
   const menuItems = [
-    {
-      title: "Administrador",
-      icon: <LayoutDashboard size={20} />,
-      href: "/admin",
-    },
+    ...(role === "Admin"
+      ? [
+          {
+            title: "Administrador",
+            icon: <LayoutDashboard size={20} />,
+            href: "/admin",
+          },
+        ]
+      : []),
     {
       title: "Datos de Salud",
       icon: <Heart size={20} />,
