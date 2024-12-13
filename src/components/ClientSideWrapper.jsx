@@ -5,15 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import SideBar from "@/components/SideBar"; // Ensure Sidebar component is imported
 
-interface ClientSideWrapperProps {
-  children: React.ReactNode;
-  requireAdmin?: boolean; // Flag to enforce admin-only access
-}
-
-const ClientSideWrapper = ({
-  children,
-  requireAdmin = false,
-}: ClientSideWrapperProps) => {
+const ClientSideWrapper = ({ children, requireAdmin = false }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { isAuthenticated, role, loading } = useAuth();
   const router = useRouter();
