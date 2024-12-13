@@ -24,17 +24,17 @@ export default function Sidebar() {
 
   const menuItems = [
     {
-      title: "Admin",
+      title: "Administrador",
       icon: <LayoutDashboard size={20} />,
       href: "/admin",
     },
     {
-      title: "Health Viewer",
+      title: "Datos de Salud",
       icon: <Heart size={20} />,
       href: "/healthviewer",
     },
-    { title: "Patients", icon: <Users size={20} />, href: "/patients" },
-    { title: "Settings", icon: <Settings size={20} />, href: "/settings" },
+    { title: "Pacientes", icon: <Users size={20} />, href: "/patients" },
+    { title: "Ajustes", icon: <Settings size={20} />, href: "/settings" },
   ];
 
   const handleLogout = () => {

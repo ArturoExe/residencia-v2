@@ -18,7 +18,7 @@
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.452.0",
-    "mongodb": "^6.9.0",
+    "mongodb": "^6.12.0",
     "mongoose": "^8.7.1",
     "next": "^14.2.20",
     "nodemailer": "^6.9.16",

@@ -8,7 +8,7 @@ export default function EditPatientPage({ params }) {
   const { id } = params;
   const router = useRouter();
   const [fields, setFields] = useState([
-    { label: "Name", name: "name", value: "", isEditing: false },
+    { label: "Nombre", name: "name", value: "", isEditing: false },
     {
       label: "Apellido Paterno",
       name: "apellidoPaterno",
@@ -168,7 +168,7 @@ export default function EditPatientPage({ params }) {
 
   return (
     <div className="container mx-auto py-6 px-4">
-      <h1 className="text-3xl py-4 border-b mb-10">Edit Patient</h1>
+      <h1 className="text-3xl py-4 border-b mb-10">Editar Paciente</h1>
       <form className="space-y-4">
         {fields.map((field, index) => (
           <div key={field.name} className="group relative">

@@ -74,7 +74,7 @@ export function UserTable({
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <UserStatusBadge
-                  status={user.isApproved ? "Approved" : "Pending"}
+                  status={user.isApproved ? "Aprobado" : "Pendiente"}
                 />
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -89,7 +89,7 @@ export function UserTable({
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <UserActions
-                  status={user.isApproved ? "Approved" : "Pending"}
+                  status={user.isApproved ? "Aprobado" : "Pendiente"}
                   onApprove={() => onApprove(user._id || user.id)}
                   onReject={() => onReject(user._id || user.id)}
                 />

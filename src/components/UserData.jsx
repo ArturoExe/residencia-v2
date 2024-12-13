@@ -100,7 +100,7 @@ const UserForm = () => {
       {/* Step 1: Personal Information */}
       {step === 1 && (
         <>
-          <h2 className="text-lg font-semibold">Personal Information</h2>
+          <h2 className="text-lg font-semibold">Información Personal</h2>
           <div className="grid grid-cols-2 gap-6">
             {/* Name */}
             <div className="space-y-2">
