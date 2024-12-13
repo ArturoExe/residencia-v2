@@ -9,11 +9,11 @@ import { Loader2, User, Mail, Lock, IdCard } from "lucide-react";
 import Link from "next/link";
 
 export default function RegisterPage() {
-  const [role, setRole] = useState < string > "";
-  const [name, setName] = useState < string > "";
-  const [email, setEmail] = useState < string > "";
-  const [id, setId] = useState < string > "";
-  const [password, setPassword] = useState < string > "";
+  const [role, setRole] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const { login } = useAuth();
