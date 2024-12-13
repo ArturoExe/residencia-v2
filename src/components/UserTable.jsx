@@ -4,19 +4,7 @@ import { User } from "@/types/user";
 import { UserStatusBadge } from "./UserStatusBadge";
 import { UserActions } from "./UserActions";
 
-interface UserTableProps {
-  users: User[];
-  onApprove: (userId: string) => void;
-  onReject: (userId: string) => void;
-  onChangeRole: (userId: string, newRole: string) => void;
-}
-
-export function UserTable({
-  users,
-  onApprove,
-  onReject,
-  onChangeRole,
-}: UserTableProps) {
+export function UserTable({ users, onApprove, onReject, onChangeRole }) {
   return (
     <div className="overflow-x-auto bg-white rounded-lg shadow">
       <table className="w-full">
