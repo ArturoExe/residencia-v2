@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import connection from "../../../../libs/connection";
 import Patient from "../../../models/patients";
 
