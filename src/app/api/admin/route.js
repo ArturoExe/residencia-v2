@@ -68,7 +68,7 @@ export async function PATCH(req) {
 }
 
 // Delete a staff member
-export async function DELETE(req: Request) {
+export async function DELETE(req) {
   try {
     await connection();
     const { id } = await req.json();
