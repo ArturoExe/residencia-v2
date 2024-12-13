@@ -5,7 +5,7 @@ const MedicalStaffSchema = new mongoose.Schema(
     role: {
       type: String,
       required: true,
-      enum: ["Doctor", "Nurse", "Technician", "Admin", "Other"], // Define valid roles
+      enum: ["Doctor", "Enfermero", "Técnico", "Administrador", "Otro"], // Define valid roles
     },
     name: {
       type: String,
